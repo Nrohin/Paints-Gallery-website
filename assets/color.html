@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nerolac Wall Color Visualizer</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background-color: #f4f6f9;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 15px;
+        min-height: 100vh;
+      }
+
+      .visualizer-card {
+        background: #ffffff;
+        width: 100%;
+        max-width: 900px;
+        border-radius: 16px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .header {
+        text-align: center;
+      }
+
+      .header h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1a1a1a;
+      }
+
+      .header p {
+        font-size: 14px;
+        color: #666;
+        margin-top: 4px;
+      }
+
+      /* Canvas Viewport */
+      .canvas-container {
+        position: relative;
+        width: 100%;
+        height: 480px;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #e2e8f0;
+        box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.1);
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      /* Floating Selected Color Badge */
+      .color-info-badge {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px);
+        padding: 10px 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 14px;
+      }
+
+      .badge-preview {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .badge-details {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .badge-title {
+        font-weight: 700;
+        color: #111;
+      }
+
+      .badge-code {
+        font-size: 12px;
+        color: #666;
+      }
+
+      /* Controls Layout */
+      .controls-grid {
+        display: grid;
+        grid-template-columns: 1fr 140px;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .section-title {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #777;
+        margin-bottom: 12px;
+      }
+
+      /* Nerolac Swatch Grid */
+      .swatches-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 10px;
+      }
+
+      .swatch-card {
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 8px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s ease;
+      }
+
+      .swatch-card:hover {
+        border-color: #cbd5e1;
+        transform: translateY(-2px);
+      }
+
+      .swatch-card.active {
+        border-color: #2563eb;
+        background: #eff6ff;
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15);
+      }
+
+      .swatch-circle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      }
+
+      .swatch-name {
+        font-size: 11px;
+        font-weight: 600;
+        color: #334155;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
+
+      .swatch-code {
+        font-size: 10px;
+        color: #64748b;
+      }
+
+      /* Color Wheel Box */
+      .custom-picker-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      input[type="color"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 70px;
+        height: 70px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+
+      input[type="color"]::-webkit-color-swatch {
+        border: 3px solid #ffffff;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hidden SVG Plaster Filter -->
+    <svg style="display: none">
+      <defs>
+        <filter id="plaster">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.7"
+            numOctaves="3"
+            result="noise"
+          />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.1 0"
+          />
+        </filter>
+      </defs>
+    </svg>
+
+    <div class="visualizer-card">
+      <div class="header">
+        <h2>Wall Color Visualizer</h2>
+        <p>Select a Nerolac shade or choose a custom color from the wheel</p>
+      </div>
+
+      <!-- Canvas Preview Area -->
+      <div class="canvas-container">
+        <canvas id="visualizerCanvas" width="900" height="480"></canvas>
+
+        <!-- Overlay Badge showing Code -->
+        <div class="color-info-badge">
+          <div class="badge-preview" id="badgePreview"></div>
+          <div class="badge-details">
+            <span class="badge-title" id="badgeName">Yellow Topas</span>
+            <span class="badge-code" id="badgeCode"
+              >Nerolac Code: 2690 (#D8B878)</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls-grid">
+        <!-- Nerolac Preset Palette -->
+        <div>
+          <div class="section-title">Popular Nerolac Shades</div>
+          <div class="swatches-grid" id="swatchGrid"></div>
+        </div>
+
+        <!-- Custom Color Wheel -->
+        <div class="custom-picker-box">
+          <div class="section-title" style="margin-bottom: 0">Custom Wheel</div>
+          <input
+            type="color"
+            id="customColorPicker"
+            value="#d8b878"
+            oninput="onCustomColorChange(this.value)"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 1. Nerolac Shade Palette Data
+      const nerolacShades = [
+        { name: "Yellow Topas", code: "2690", hex: "#d8b878" },
+        { name: "Lotus Seed", code: "4936", hex: "#e0cca9" },
+        { name: "Bombay Baguette", code: "4937", hex: "#d8b896" },
+        { name: "Log House", code: "4938", hex: "#cb9f7b" },
+        { name: "Copper Grille", code: "4941", hex: "#ab7a58" },
+        { name: "Sandy Walk", code: "4943", hex: "#e6d5ba" },
+        { name: "Solid Wood", code: "4963", hex: "#837061" },
+        { name: "Down to Earth", code: "4942", hex: "#8c6243" },
+      ];
+
+      const canvas = document.getElementById("visualizerCanvas");
+      const ctx = canvas.getContext("2d");
+
+      // UI Elements
+      const badgePreview = document.getElementById("badgePreview");
+      const badgeName = document.getElementById("badgeName");
+      const badgeCode = document.getElementById("badgeCode");
+      const swatchGrid = document.getElementById("swatchGrid");
+
+      // Transparent Foreground Image (`color.webp`)
+      const fgImg = new Image();
+      fgImg.src = "color.webp";
+
+      // Procedural SVG Texture Data URL
+      const svgTextureImg = new Image();
+      const svgString = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="900" height="480">
+        <filter id="p">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" result="n"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.1 0"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#p)" />
+      </svg>`;
+      svgTextureImg.src =
+        "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgString);
+
+      let currentHex = nerolacShades[0].hex;
+      let currentName = nerolacShades[0].name;
+      let currentCode = nerolacShades[0].code;
+
+      let loadedCount = 0;
+      function checkLoaded() {
+        loadedCount++;
+        if (loadedCount === 2) {
+          renderVisualizer();
+        }
+      }
+      fgImg.onload = checkLoaded;
+      svgTextureImg.onload = checkLoaded;
+
+      // 2. Render Swatch Palette UI
+      function initSwatches() {
+        swatchGrid.innerHTML = "";
+        nerolacShades.forEach((shade, index) => {
+          const card = document.createElement("div");
+          card.className = `swatch-card ${index === 0 ? "active" : ""}`;
+          card.onclick = () => selectNerolacShade(shade, card);
+
+          card.innerHTML = `
+          <div class="swatch-circle" style="background-color: ${shade.hex};"></div>
+          <span class="swatch-name">${shade.name}</span>
+          <span class="swatch-code">${shade.code}</span>
+        `;
+          swatchGrid.appendChild(card);
+        });
+      }
+
+      // 3. Select Nerolac Swatch Event
+      function selectNerolacShade(shade, cardEl) {
+        document
+          .querySelectorAll(".swatch-card")
+          .forEach((c) => c.classList.remove("active"));
+        cardEl.classList.add("active");
+
+        currentHex = shade.hex;
+        currentName = shade.name;
+        currentCode = shade.code;
+
+        document.getElementById("customColorPicker").value = shade.hex;
+        updateBadge();
+        renderVisualizer();
+      }
+
+      // 4. Custom Wheel Event
+      function onCustomColorChange(hex) {
+        document
+          .querySelectorAll(".swatch-card")
+          .forEach((c) => c.classList.remove("active"));
+
+        currentHex = hex;
+        currentName = "Custom Color";
+        currentCode = "Custom Hex";
+
+        updateBadge();
+        renderVisualizer();
+      }
+
+      // 5. Update Badge Overlay Info
+      function updateBadge() {
+        badgePreview.style.backgroundColor = currentHex;
+        badgeName.textContent = currentName;
+        badgeCode.textContent =
+          currentCode === "Custom Hex"
+            ? `HEX: ${currentHex.toUpperCase()}`
+            : `Nerolac Code: ${currentCode} (${currentHex.toUpperCase()})`;
+      }
+
+      // 6. Draw Canvas Layers
+      function renderVisualizer() {
+        const w = canvas.width;
+        const h = canvas.height;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Layer 1: Solid Base Wall Color
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fillStyle = currentHex;
+        ctx.fillRect(0, 0, w, h);
+
+        // Layer 2: SVG Plaster Texture
+        ctx.drawImage(svgTextureImg, 0, 0, w, h);
+
+        // Layer 3: Corner Shadows (Ceiling/Wall junction depth)
+        const topLeft = ctx.createRadialGradient(0, 0, 10, 0, 0, 320);
+        topLeft.addColorStop(0, "rgba(0, 0, 0, 0.4)");
+        topLeft.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = topLeft;
+        ctx.fillRect(0, 0, w, h);
+
+        const topRight = ctx.createRadialGradient(w, 0, 10, w, 0, 320);
+        topRight.addColorStop(0, "rgba(0, 0, 0, 0.4)");
+        topRight.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = topRight;
+        ctx.fillRect(0, 0, w, h);
+
+        // Layer 4: Overhead Ceiling Light Beam
+        const centerLight = ctx.createRadialGradient(
+          w * 0.5,
+          h * 0.2,
+          40,
+          w * 0.5,
+          h * 0.5,
+          500,
+        );
+        centerLight.addColorStop(0, "rgba(255, 255, 255, 0.2)");
+        centerLight.addColorStop(0.8, "rgba(0, 0, 0, 0.02)");
+        centerLight.addColorStop(1, "rgba(0, 0, 0, 0.25)");
+        ctx.fillStyle = centerLight;
+        ctx.fillRect(0, 0, w, h);
+
+        // Layer 5: Foreground Cutout Image (Furniture, floor, plant)
+        ctx.drawImage(fgImg, 0, 0, w, h);
+      }
+
+      // Initialize Swatches on Page Load
+      initSwatches();
+      updateBadge();
+    </script>
+  </body>
+</html>

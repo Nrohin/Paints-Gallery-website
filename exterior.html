@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paint's Gallery - Interior Wall Paints</title>
+
+    <!-- Google Fonts: Playfair Display & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="search.css" />
+  </head>
+  <body>
+    <header class="navbar glass" id="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="brand">
+          <img src="assets/logo.webp" alt="Paint's Gallery logo" />
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li>
+              <a
+                href="index.html#home"
+                class="nav-link active"
+                data-section="home"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="index.html#about" class="nav-link" data-section="about"
+                >About</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                href="index.html#products"
+                class="nav-link dropdown-toggle"
+                data-section="products"
+              >
+                Products
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="interior.html"
+                    >KNP Nerolac Interior paints</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="exterior.html"
+                    >KNP Nerolac exterior paints</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="primer.html"
+                    >KNP Nerolac primers</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="enamel.html"
+                    >KNP Nerolac enamel paints</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="putty.html"
+                    >KNP Nerolac Putty</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="distemper.html"
+                    >KNP Nerolac Distemper</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="waterproof.html"
+                    >KNP Nerolac Waterproofing</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a
+                href="index.html#estimator"
+                class="nav-link"
+                data-section="estimator"
+                >Paint Calculator</a
+              >
+            </li>
+
+            <li>
+              <a
+                href="index.html#services"
+                class="nav-link"
+                data-section="services"
+                >Services</a
+              >
+            </li>
+            <li>
+              <a
+                href="index.html#visualizer"
+                class="nav-link"
+                data-section="visulizer"
+                >Color Visualizer</a
+              >
+            </li>
+
+            <li>
+              <a
+                href="index.html#contact"
+                class="nav-link"
+                data-section="contact"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="tel:+9779807039268" class="btn btn-primary ripple"
+            >Call Now</a
+          >
+          <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="Toggle Menu"
+          >
+            <span class="menu-bars">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="28px"
+                viewBox="0 -960 960 960"
+                width="28px"
+                fill="#17418c"
+              >
+                <path
+                  d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
+                />
+              </svg>
+            </span>
+
+            <svg
+              class="menu-close-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 -960 960 960"
+              width="32"
+              height="32"
+            >
+              <path
+                fill="currentColor"
+                d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- Floating Ambient Background Blobs -->
+    <div class="bg-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+    </div>
+
+    <!-- Explore Exterior Paints Section -->
+    <section class="section">
+      <div class="section-inner">
+        <!-- Section Header -->
+        <div class="section-head center">
+          <span class="eyebrow">Paint's Gallery</span>
+          <h2>
+            Explore Our Range of
+            <span class="text-gradient">Exterior Wall Paints</span>
+          </h2>
+          <p>
+            Discover luxury Exterior finishes carefully classified under Luxury,
+            Premium,& Popular ranges to bring deep color clarity & timeless
+            perfection to your living space.
+          </p>
+        </div>
+
+        <!-- Paints Grid -->
+        <div class="paint-grid">
+          <!-- Product 1 -->
+          <div id="everlast">
+            <input type="checkbox" id="paint-1" class="card-toggle" />
+            <label for="paint-1" class="product-card">
+              <span class="card-badge">Luxury Range</span>
+              <div class="card-media">
+                <img src="assets/ex product/everlast.webp" />
+              </div>
+              <div class="card-header">
+                <h3>KNP Nerolac Excel Everlast 12</h3>
+                <p class="card-short-desc">
+                  KNP Nerolac Excel Everlast 12 is a highly durable, UV-
+                </p>
+              </div>
+
+              <div class="click-hint">
+                <span class="text-expand">Click to view details</span>
+                <span class="text-collapse">Click to collapse</span>
+                <span class="arrow">&#9660;</span>
+              </div>
+
+              <!-- Expandable Content on Click -->
+              <div class="card-expandable-content">
+                <p class="full-description">
+                  KNP Nerolac Excel Everlast 12 is a highly durable,
+                  UV-resistant water-based exterior emulsion with a unique
+                  polyurethane—silicon hybrid emulsion/latex. It offers a
+                  best-in-class sheen and excellent dust pick-up resistance.
+                  Fortified with ENCAP additives, it resists diverse harsh
+                  weather conditions with excellent anti-algae performance and
+                  durability. Excel Everlast comes with a 12-year warranty.
+                </p>
+                <div class="features-label">Key Features</div>
+                <ul class="features-list">
+                  <li>Low VOC & Ultra-Low Odor.</li>
+                  <li>Anti Algal Protection.</li>
+                  <li>Very Good Colour Retention.</li>
+                  <li>Heat Guard Technology.</li>
+                </ul>
+                <a href="tel:+9779807039268" class="card-cta-btn"
+                  >Inquire Now</a
+                >
+              </div>
+            </label>
+          </div>
+
+          <!-- Product 2 -->
+          <div id="mica">
+            <input type="checkbox" id="paint-2" class="card-toggle" />
+            <label for="paint-2" class="product-card">
+              <span class="card-badge">Luxury Range</span>
+              <div class="card-media">
+                <img
+                  src="assets/ex product/mica.webp"
+                  alt="KNP Nerolac Impressions HD"
+                  onerror="this.src = ''"
+                />
+              </div>
+              <div class="card-header">
+                <h3>KNP Nerolac Excel Mica Marble</h3>
+                <p class="card-short-desc">
+                  The first elastomeric paint in Nepal,with a 10-year warranty.
+                </p>
+              </div>
+
+              <div class="click-hint">
+                <span class="text-expand">Click to view details</span>
+                <span class="text-collapse">Click to collapse</span>
+                <span class="arrow">&#9660;</span>
+              </div>
+
+              <!-- Expandable Content on Click -->
+              <div class="card-expandable-content">
+                <p class="full-description">
+                  The first elastomeric paint in Nepal, KNP Nerolac Excel Mica
+                  Marble, comes with a 10-year warranty. It is an extremely
+                  durable, UV-resistant exterior emulsion paint with enhanced
+                  barrier protection, paint film reinforcement, and increased
+                  intercoat adhesion and toughness. Overall, this exterior wall
+                  paint maintains the vibrancy of the original color and
+                  prevents outward damage.
+                </p>
+                <div class="features-label">Key Features</div>
+                <ul class="features-list">
+                  <li>Low VOC & Ultra-Low Odor.</li>
+                  <li>Water Barrier Protection.</li>
+                  <li>Low dust Pickup.</li>
+                  <li>Improved Anti Algal Performance.</li>
+                </ul>
+                <a href="tel:+9779807039268" class="card-cta-btn"
+                  >Inquire Now</a
+                >
+              </div>
+            </label>
+          </div>
+
+          <!-- Product 3 -->
+          <div id="total">
+            <input type="checkbox" id="paint-3" class="card-toggle" />
+            <label for="paint-3" class="product-card">
+              <span class="card-badge">Premium Range</span>
+              <div class="card-media">
+                <img
+                  src="assets/ex product/total.webp"
+                  onerror="this.src = ''"
+                />
+              </div>
+              <div class="card-header">
+                <h3>KNP Nerolac Excel Total</h3>
+                <p class="card-short-desc">
+                  A long-lasting, premium, high-performance paint with a 7-year
+                  warranty
+                </p>
+              </div>
+
+              <div class="click-hint">
+                <span class="text-expand">Click to view details</span>
+                <span class="text-collapse">Click to collapse</span>
+                <span class="arrow">&#9660;</span>
+              </div>
+
+              <!-- Expandable Content on Click -->
+              <div class="card-expandable-content">
+                <p class="full-description">
+                  KNP Nerolac Excel Total is a long-lasting, premium,
+                  high-performance paint with a 7-year warranty that protects
+                  the wall against harsh weather conditions. A smooth and
+                  flawless finish without the need for regular touch-ups saves
+                  money and time on maintenance.
+                </p>
+                <div class="features-label">Key Features</div>
+                <ul class="features-list">
+                  <li>Low VOC & Ultra-Low Odor.</li>
+                  <li>Excellent Water Repellency.</li>
+                  <li>Excellent Durability.</li>
+                  <li>Unique Siloxane Polymer.</li>
+                </ul>
+                <br />
+                <a href="tel:+9779807039268" class="card-cta-btn"
+                  >Inquire Now</a
+                >
+              </div>
+            </label>
+          </div>
+
+          <!-- Product 4 -->
+          <div id="anti-peel">
+            <input type="checkbox" id="paint-4" class="card-toggle" />
+            <label for="paint-4" class="product-card">
+              <span class="card-badge">Premium Range</span>
+              <div class="card-media">
+                <img
+                  src="assets/ex product/antipeel.webp"
+                  alt="KNP Nerolac Beauty Gold"
+                  onerror="this.src = ''"
+                />
+              </div>
+              <div class="card-header">
+                <h3>KNP Nerolac Excel Anti Peel</h3>
+                <p class="card-short-desc">
+                  A premium water-based,long-lasting paint based on 100% acrylic
+                  resin
+                </p>
+              </div>
+
+              <div class="click-hint">
+                <span class="text-expand">Click to view details</span>
+                <span class="text-collapse">Click to collapse</span>
+                <span class="arrow">&#9660;</span>
+              </div>
+
+              <!-- Expandable Content on Click -->
+              <div class="card-expandable-content">
+                <p class="full-description">
+                  KNP Nerolac Excel Anti Peel is a premium water-based,
+                  high-performance, long-lasting paint based on 100% acrylic
+                  resin. It gives your walls a tough and flexible film, adheres
+                  strongly to surfaces, and provides strong resistance against
+                  cracks and peelings
+                </p>
+                <div class="features-label">Key Features</div>
+                <ul class="features-list">
+                  <li>Low VOC & Ultra-Low Odor.</li>
+                  <li>Sheen Finish.</li>
+                  <li>Resistance to Peeling.</li>
+                  <li>Dirt Resistance.</li>
+                </ul>
+                <a href="tel:+9779807039268" class="card-cta-btn"
+                  >Inquire Now</a
+                >
+              </div>
+            </label>
+          </div>
+
+          <!-- Product 5 -->
+          <div id="suraksha-plus">
+            <input type="checkbox" id="paint-5" class="card-toggle" />
+            <label for="paint-5" class="product-card">
+              <span class="card-badge">Popular Range</span>
+              <div class="card-media">
+                <img
+                  src="assets/ex product/surakshya.webp"
+                  onerror="this.src = ''"
+                />
+              </div>
+              <div class="card-header">
+                <h3>KNP Nerolac Suraksha Plus</h3>
+                <p class="card-short-desc">
+                  An acrylic exterior emulsion paint with unique Colour Lock+
+                  technology that locks in the colors,
+                </p>
+              </div>
+
+              <div class="click-hint">
+                <span class="text-expand">Click to view details</span>
+                <span class="text-collapse">Click to collapse</span>
+                <span class="arrow">&#9660;</span>
+              </div>
+
+              <!-- Expandable Content on Click -->
+              <div class="card-expandable-content">
+                <p class="full-description">
+                  KNP Nerolac Suraksha Plus is an acrylic exterior emulsion
+                  paint with unique Colour Lock+ technology that locks in the
+                  colors, ensuring they look new for a long time. As a result,
+                  it enhances the aesthetic appeal of your walls by providing
+                  long-lasting protection and preserving color and integrity.
+                </p>
+                <div class="features-label">Key Features</div>
+                <ul class="features-list">
+                  <li>Low VOC & Ultra-Low Odor.</li>
+                  <li>Good Coverage & Value for Money.</li>
+                  <li>High Whiteness & Excellent Opacity.</li>
+                  <li>Optimum Mild Sheen.</li>
+                </ul>
+                <a href="tel:+9779807039268" class="card-cta-btn"
+                  >Inquire Now</a
+                >
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="section section-tint" id="features">
+      <div class="section-inner">
+        <div class="section-head center reveal-up">
+          <span class="eyebrow">Why It Matters</span>
+          <h2>What Makes Us Different</h2>
+          <p>Six commitments we hold ourselves to on every single visit.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="glass feature-card reveal-up" style="--delay: 0.05s">
+            <div class="feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="40px"
+                viewBox="0 -960 960 960"
+                width="40px"
+                fill="#FF6B00"
+              >
+                <path
+                  d="M287-527q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM80-160v-112q0-33 17-62t47-44q51-26 115-44t141-18h14q6 0 12 2-8 18-13.5 37.5T404-360h-4q-71 0-127.5 18T180-306q-9 5-14.5 14t-5.5 20v32h252q6 21 16 41.5t22 38.5H80Zm560 40-12-60q-12-5-22.5-10.5T584-204l-58 18-40-68 46-40q-2-14-2-26t2-26l-46-40 40-68 58 18q11-8 21.5-13.5T628-460l12-60h80l12 60q12 5 22.5 11t21.5 15l58-20 40 70-46 40q2 12 2 25t-2 25l46 40-40 68-58-18q-11 8-21.5 13.5T732-180l-12 60h-80Zm96.5-143.5Q760-287 760-320t-23.5-56.5Q713-400 680-400t-56.5 23.5Q600-353 600-320t23.5 56.5Q647-240 680-240t56.5-23.5Zm-280-320Q480-607 480-640t-23.5-56.5Q433-720 400-720t-56.5 23.5Q320-673 320-640t23.5 56.5Q367-560 400-560t56.5-23.5ZM400-640Zm12 400Z"
+                />
+              </svg>
+            </div>
+            <h3>Expert Color Advice</h3>
+            <p>
+              Personalized consultation to find the perfect shade for your space
+              and lighting.
+            </p>
+          </div>
+          <div class="glass feature-card reveal-up" style="--delay: 0.1s">
+            <div class="feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="40px"
+                viewBox="0 -960 960 960"
+                width="40px"
+                fill="#FF6B00"
+              >
+                <path
+                  d="m363-310 117-71 117 71-31-133 104-90-137-11-53-126-53 126-137 11 104 90-31 133ZM481-29 346-160H160v-186L26-480l134-134v-186h186l135-134 133 134h186v186l134 134-134 134v186H614L481-29Zm0-84 108-107h151v-151l109-109-109-109v-151H589L481-849 371-740H220v151L111-480l109 109v151h150l111 107Zm0-368Z"
+                />
+              </svg>
+            </div>
+            <h3>Top Quality Paint</h3>
+            <p>
+              Only genuine Nerolac and KNP products — no dilution, no shortcuts,
+              ever.
+            </p>
+          </div>
+          <div class="glass feature-card reveal-up" style="--delay: 0.15s">
+            <div class="feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="45px"
+                viewBox="0 -960 960 960"
+                width="45px"
+                fill="#FF6B00"
+              >
+                <path
+                  d="M332-120q-88 0-150-62t-62-150q0-38 13-72.5t36-63.5l152-182-95-190h509l-95 190 151 182q24 29 36.5 63.5T841-332q0 88-62 150t-150 62H332Zm148-218q-25 0-42-17.5T421-398q0-25 17-42.5t42-17.5q26 0 43.5 17.5T541-398q0 25-17.5 42.5T480-338ZM375-675h210l53-105H323l52 105Zm-43 495h296q63 0 107.5-44.5T780-332q0-27-9-52t-26-45L590-615H370L216-429q-17 20-26.5 45t-9.5 52q0 63 44.5 107.5T332-180Z"
+                />
+              </svg>
+            </div>
+            <h3>Affordable Price</h3>
+            <p>
+              Premium quality at prices that respect your budget, big project or
+              small.
+            </p>
+          </div>
+          <div class="glass feature-card reveal-up" style="--delay: 0.2s">
+            <div class="feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="42px"
+                viewBox="0 -960 960 960"
+                width="42px"
+                fill="#FF6B00"
+              >
+                <path
+                  d="M475-146.67q4.67 0 10.33-2.33 5.67-2.33 9-5.67l334-334.66Q841-502 847.17-518.11q6.16-16.11 6.16-32.22 0-16.67-6.16-32.84-6.17-16.16-18.84-28.5L651.67-788.33q-12.34-12.67-28.5-18.84-16.17-6.16-32.84-6.16-16.11 0-32.22 6.16Q542-801 529.33-788.33l-15.66 15.66L592.33-693Q606-679 615-660.67q9 18.34 9 39.67 0 39.33-29.17 68.17Q565.67-524 526.33-524q-23.33 0-40.5-7.33-17.16-7.34-30.95-21.23L381-626 202-447q-4.33 4.33-6.17 9.18-1.83 4.86-1.83 10.4 0 11.09 7.67 18.92 7.66 7.83 18.77 7.83 5.56 0 10.56-2.66 5-2.67 8.33-6l137.34-137.34L423.33-500 287-363.33q-4.33 4.33-6.17 9.5-1.83 5.16-1.83 10.5 0 10.66 8 18.66t18.67 8q5.33 0 10.33-2.33t8.33-5.67l137.34-137L508.33-415 372-278.33q-3.67 3.33-5.83 8.89-2.17 5.55-2.17 11.11 0 10.66 8 18.66t18.67 8q5.33 0 9.83-1.83t8.83-6.17l137.34-137L593.33-330 456-192.67q-4.33 4.34-6.17 9.5Q448-178 448-173.33q0 12 7.5 19.33 7.5 7.33 19.5 7.33ZM474.71-80q-34.38 0-61.21-24.5t-31.83-60.91q-34-4.92-57-27.92t-28-57q-34-5-56.5-28.5t-27.5-56.5q-37.34-5-61.34-31t-24-62q0-18 6.99-35.54 6.98-17.53 20.01-30.8L381-721l117 117q6 6.33 13.56 9.83 7.55 3.5 15.11 3.5 11.66 0 21.33-9.5 9.67-9.5 9.67-21.27 0-5.23-2.84-11.56-2.83-6.33-9.16-12.33l-143-143q-12.34-12.67-28.5-18.84-16.17-6.16-32.84-6.16-16.11 0-32.22 6.16Q293-801 280.37-788.43L132-639.67q-12.33 12.34-18 26.67-5.67 14.33-7 31.33t5 33.5q6.33 16.5 16.33 30.17l-48 48q-19-22.33-30-52.17-11-29.83-10.33-60.5.67-29.33 12.33-56.5Q64-666.33 85-687.33L232.67-835q22.66-22.33 51.03-33.33 28.36-11 58.16-11 29.81 0 57.97 11 28.17 11 50.5 33.33L466-819.33 481.67-835q22.66-22.33 51.03-33.33 28.36-11 58.16-11 29.81 0 57.97 11 28.17 11 50.5 33.33L875-659.33q22.33 22.33 33.67 51.02Q920-579.62 920-549.98q0 29.65-11.33 57.81Q897.33-464 875-441.67L541-108q-13.33 13.33-30.52 20.67Q493.29-80 474.71-80Zm-98.38-550.67Z"
+                />
+              </svg>
+            </div>
+            <h3>Trusted Brands</h3>
+            <p>
+              Partnered exclusively with names known for consistency and
+              durability.
+            </p>
+          </div>
+          <div class="glass feature-card reveal-up" style="--delay: 0.25s">
+            <div class="feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="43px"
+                viewBox="0 -960 960 960"
+                width="43px"
+                fill="#FF6B00"
+              >
+                <path
+                  d="M190.33-195.67q-33-35.66-29.66-85h-100l14.66-66.66h112.34q15.66-18.34 37.66-28.84 22-10.5 48-10.5t48 10.5q22 10.5 37.67 28.84h187.67l89.33-386H184.67l3.33-14.34q5.33-23.33 23.17-37.83Q229-800 252.67-800h466.66L681-633.33h122.33l116 154.66-39.33 198h-80q3.33 49.34-30 85Q736.67-160 686.67-160t-83-35.67q-33-35.66-29.67-85H386.67q3.33 49.34-30 85Q323.33-160 273.33-160t-83-35.67ZM635-433.33h207.67l5.33-29-78-104.34H665.67L635-433.33Zm-5.67-273 6.67-27-89.33 386 6-26.34 34-146 42.66-186.66Zm-608 272.66L38-500.33h220l-16.67 66.66h-220Zm80-146L118-646.33h260l-16.67 66.66h-260Zm172 353q19.67 0 33.17-13.83t13.5-32.83q0-19.67-13.5-33.17T273.33-320q-19 0-32.83 13.5-13.83 13.5-13.83 33.17 0 19 13.83 32.83 13.83 13.83 32.83 13.83Zm413.34 0q19.66 0 33.16-13.83 13.5-13.83 13.5-32.83 0-19.67-13.5-33.17T686.67-320q-19 0-32.84 13.5Q640-293 640-273.33q0 19 13.83 32.83 13.84 13.83 32.84 13.83Z"
+                />
+              </svg>
+            </div>
+            <h3>Fast Delivery</h3>
+            <p>
+              Quick turnaround on bulk and walk-in orders across Biratnagar.
+            </p>
+          </div>
+          <div class="glass feature-card reveal-up" style="--delay: 0.3s">
+            <div class="feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="42px"
+                viewBox="0 -960 960 960"
+                width="42px"
+                fill="#FF6B00"
+              >
+                <path
+                  d="M440-120v-66.67h333.33V-484q0-121.46-85.38-206.06-85.38-84.61-207.95-84.61t-207.95 84.61q-85.38 84.6-85.38 206.06v244H160q-33 0-56.5-23.5T80-320v-80q0-21 10.5-39.5T120-469l3-53q8-68 39.5-126t79-101q47.5-43 109-67T480-840q68 0 129 24t109 66.5Q766-707 797-649t40 126l3 52q19 9 29.5 27t10.5 38v92q0 20-10.5 38T840-249v62.33q0 27.5-19.58 47.09Q800.83-120 773.33-120H440ZM336.17-416.28q-9.5-9.62-9.5-23.84 0-14.21 9.61-23.71 9.62-9.5 23.84-9.5 14.21 0 23.71 9.61 9.5 9.62 9.5 23.84 0 14.21-9.61 23.71-9.62 9.5-23.84 9.5-14.21 0-23.71-9.61Zm240 0q-9.5-9.62-9.5-23.84 0-14.21 9.61-23.71 9.62-9.5 23.84-9.5 14.21 0 23.71 9.61 9.5 9.62 9.5 23.84 0 14.21-9.61 23.71-9.62 9.5-23.84 9.5-14.21 0-23.71-9.61ZM241-462q-7-106 64-182t177-76q87.67 0 152.83 57.17Q700-605.67 714-519q-89.67-1-164.17-49.67-74.5-48.66-115.02-129.33Q419-618 367.5-555.5T241-462Z"
+                />
+              </svg>
+            </div>
+            <h3>Professional Support</h3>
+            <p>
+              Real answers on call or WhatsApp — before, during, and after your
+              purchase.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="section-inner footer-grid">
+        <!-- Footer Brand -->
+        <div class="footer-brand">
+          <img
+            src="assets/logo-sm.png"
+            style="border-radius: 5px"
+            alt="Paint's Gallery"
+          />
+          <div>
+            <strong>Paint's Gallery</strong><span>Your Paint Expert</span>
+          </div>
+          <p>
+            Genuine Nerolac &amp; KNP paints at Puspalal Chowk, Biratnagar —
+            colour advice you can trust.
+          </p>
+          <div class="social-icons">
+            <!-- Facebook -->
+            <a href="#" aria-label="Facebook">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                shape-rendering="geometricPrecision"
+                text-rendering="geometricPrecision"
+                image-rendering="optimizeQuality"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                viewBox="0 0 509 509"
+              >
+                <g fill-rule="nonzero">
+                  <path
+                    fill="#0866FF"
+                    d="M509 254.5C509 113.94 395.06 0 254.5 0S0 113.94 0 254.5C0 373.86 82.17 474 193.02 501.51V332.27h-52.48V254.5h52.48v-33.51c0-86.63 39.2-126.78 124.24-126.78 16.13 0 43.95 3.17 55.33 6.33v70.5c-6.01-.63-16.44-.95-29.4-.95-41.73 0-57.86 15.81-57.86 56.91v27.5h83.13l-14.28 77.77h-68.85v174.87C411.35 491.92 509 384.62 509 254.5z"
+                  />
+                  <path
+                    fill="#fff"
+                    d="M354.18 332.27l14.28-77.77h-83.13V227c0-41.1 16.13-56.91 57.86-56.91 12.96 0 23.39.32 29.4.95v-70.5c-11.38-3.16-39.2-6.33-55.33-6.33-85.04 0-124.24 40.16-124.24 126.78v33.51h-52.48v77.77h52.48v169.24c19.69 4.88 40.28 7.49 61.48 7.49 10.44 0 20.72-.64 30.83-1.86V332.27h68.85z"
+                  />
+                </g>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" aria-label="Instagram">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 132.004 132"
+              >
+                <defs>
+                  <linearGradient id="b">
+                    <stop offset="0" stop-color="#3771c8" />
+                    <stop stop-color="#3771c8" offset=".128" />
+                    <stop offset="1" stop-color="#60f" stop-opacity="0" />
+                  </linearGradient>
+                  <linearGradient id="a">
+                    <stop offset="0" stop-color="#fd5" />
+                    <stop offset=".1" stop-color="#fd5" />
+                    <stop offset=".5" stop-color="#ff543e" />
+                    <stop offset="1" stop-color="#c837ab" />
+                  </linearGradient>
+                  <radialGradient
+                    id="c"
+                    cx="158.429"
+                    cy="578.088"
+                    r="65"
+                    xlink:href="#a"
+                    gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(0 -1.98198 1.8439 0 -1031.402 454.004)"
+                    fx="158.429"
+                    fy="578.088"
+                  />
+                  <radialGradient
+                    id="d"
+                    cx="147.694"
+                    cy="473.455"
+                    r="65"
+                    xlink:href="#b"
+                    gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(.17394 .86872 -3.5818 .71718 1648.348 -458.493)"
+                    fx="147.694"
+                    fy="473.455"
+                  />
+                </defs>
+                <path
+                  fill="url(#c)"
+                  d="M65.03 0C37.888 0 29.95.028 28.407.156c-5.57.463-9.036 1.34-12.812 3.22-2.91 1.445-5.205 3.12-7.47 5.468C4 13.126 1.5 18.394.595 24.656c-.44 3.04-.568 3.66-.594 19.188-.01 5.176 0 11.988 0 21.125 0 27.12.03 35.05.16 36.59.45 5.42 1.3 8.83 3.1 12.56 3.44 7.14 10.01 12.5 17.75 14.5 2.68.69 5.64 1.07 9.44 1.25 1.61.07 18.02.12 34.44.12 16.42 0 32.84-.02 34.41-.1 4.4-.207 6.955-.55 9.78-1.28 7.79-2.01 14.24-7.29 17.75-14.53 1.765-3.64 2.66-7.18 3.065-12.317.088-1.12.125-18.977.125-36.81 0-17.836-.04-35.66-.128-36.78-.41-5.22-1.305-8.73-3.127-12.44-1.495-3.037-3.155-5.305-5.565-7.624C116.9 4 111.64 1.5 105.372.596 102.335.157 101.73.027 86.19 0H65.03z"
+                  transform="translate(1.004 1)"
+                />
+                <path
+                  fill="url(#d)"
+                  d="M65.03 0C37.888 0 29.95.028 28.407.156c-5.57.463-9.036 1.34-12.812 3.22-2.91 1.445-5.205 3.12-7.47 5.468C4 13.126 1.5 18.394.595 24.656c-.44 3.04-.568 3.66-.594 19.188-.01 5.176 0 11.988 0 21.125 0 27.12.03 35.05.16 36.59.45 5.42 1.3 8.83 3.1 12.56 3.44 7.14 10.01 12.5 17.75 14.5 2.68.69 5.64 1.07 9.44 1.25 1.61.07 18.02.12 34.44.12 16.42 0 32.84-.02 34.41-.1 4.4-.207 6.955-.55 9.78-1.28 7.79-2.01 14.24-7.29 17.75-14.53 1.765-3.64 2.66-7.18 3.065-12.317.088-1.12.125-18.977.125-36.81 0-17.836-.04-35.66-.128-36.78-.41-5.22-1.305-8.73-3.127-12.44-1.495-3.037-3.155-5.305-5.565-7.624C116.9 4 111.64 1.5 105.372.596 102.335.157 101.73.027 86.19 0H65.03z"
+                  transform="translate(1.004 1)"
+                />
+                <path
+                  fill="#fff"
+                  d="M66.004 18c-13.036 0-14.672.057-19.792.29-5.11.234-8.598 1.043-11.65 2.23-3.157 1.226-5.835 2.866-8.503 5.535-2.67 2.668-4.31 5.346-5.54 8.502-1.19 3.053-2 6.542-2.23 11.65C18.06 51.327 18 52.964 18 66s.058 14.667.29 19.787c.235 5.11 1.044 8.598 2.23 11.65 1.227 3.157 2.867 5.835 5.536 8.503 2.667 2.67 5.345 4.314 8.5 5.54 3.054 1.187 6.543 1.996 11.652 2.23 5.12.233 6.755.29 19.79.29 13.037 0 14.668-.057 19.788-.29 5.11-.234 8.602-1.043 11.656-2.23 3.156-1.226 5.83-2.87 8.497-5.54 2.67-2.668 4.31-5.346 5.54-8.502 1.18-3.053 1.99-6.542 2.23-11.65.23-5.12.29-6.752.29-19.788 0-13.036-.06-14.672-.29-19.792-.24-5.11-1.05-8.598-2.23-11.65-1.23-3.157-2.87-5.835-5.54-8.503-2.67-2.67-5.34-4.31-8.5-5.535-3.06-1.187-6.55-1.996-11.66-2.23-5.12-.233-6.75-.29-19.79-.29zm-4.306 8.65c1.278-.002 2.704 0 4.306 0 12.816 0 14.335.046 19.396.276 4.68.214 7.22.996 8.912 1.653 2.24.87 3.837 1.91 5.516 3.59 1.68 1.68 2.72 3.28 3.592 5.52.657 1.69 1.44 4.23 1.653 8.91.23 5.06.28 6.58.28 19.39s-.05 14.33-.28 19.39c-.214 4.68-.996 7.22-1.653 8.91-.87 2.24-1.912 3.835-3.592 5.514-1.68 1.68-3.275 2.72-5.516 3.59-1.69.66-4.232 1.44-8.912 1.654-5.06.23-6.58.28-19.396.28-12.817 0-14.336-.05-19.396-.28-4.68-.216-7.22-.998-8.913-1.655-2.24-.87-3.84-1.91-5.52-3.59-1.68-1.68-2.72-3.276-3.592-5.517-.657-1.69-1.44-4.23-1.653-8.91-.23-5.06-.276-6.58-.276-19.398s.046-14.33.276-19.39c.214-4.68.996-7.22 1.653-8.912.87-2.24 1.912-3.84 3.592-5.52 1.68-1.68 3.28-2.72 5.52-3.592 1.692-.66 4.233-1.44 8.913-1.655 4.428-.2 6.144-.26 15.09-.27zm29.928 7.97c-3.18 0-5.76 2.577-5.76 5.758 0 3.18 2.58 5.76 5.76 5.76 3.18 0 5.76-2.58 5.76-5.76 0-3.18-2.58-5.76-5.76-5.76zm-25.622 6.73c-13.613 0-24.65 11.037-24.65 24.65 0 13.613 11.037 24.645 24.65 24.645C79.617 90.645 90.65 79.613 90.65 66S79.616 41.35 66.003 41.35zm0 8.65c8.836 0 16 7.163 16 16 0 8.836-7.164 16-16 16-8.837 0-16-7.164-16-16 0-8.837 7.163-16 16-16z"
+                />
+              </svg>
+            </a>
+            <!-- WhatsApp -->
+            <a
+              href="https://wa.me/9779807039268"
+              target="_blank"
+              rel="noopener"
+              aria-label="WhatsApp"
+            >
+              <svg
+                id="Layer_1"
+                data-name="Layer 1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 512 512"
+              >
+                <defs>
+                  <style>
+                    .cls-1,
+                    .cls-2 {
+                      fill-rule: evenodd;
+                    }
+                    .cls-1 {
+                      fill: url(#linear-gradient);
+                    }
+                    .cls-2 {
+                      fill: #fff;
+                    }
+                  </style>
+                  <linearGradient
+                    id="linear-gradient"
+                    x1="1337.28"
+                    y1="518.24"
+                    x2="1337.28"
+                    y2="-2164.82"
+                    gradientTransform="matrix(0.19, 0, 0, -0.19, 0.81, 98.89)"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0" stop-color="#61fd7d" />
+                    <stop offset="1" stop-color="#2bb826" />
+                  </linearGradient>
+                </defs>
+                <title>wa</title>
+                <path
+                  class="cls-1"
+                  d="M512,382.07c0,2.8-.09,8.88-.26,13.58-.41,11.49-1.32,26.32-2.7,33.07a109.76,109.76,0,0,1-9.27,27.71,98.45,98.45,0,0,1-43.43,43.39,110.21,110.21,0,0,1-27.87,9.28c-6.69,1.35-21.41,2.24-32.82,2.65-4.71.17-10.79.25-13.58.25l-252.1,0c-2.8,0-8.88-.09-13.58-.26-11.49-.41-26.32-1.32-33.07-2.69a110.37,110.37,0,0,1-27.72-9.28A98.5,98.5,0,0,1,12.18,456.3,110.21,110.21,0,0,1,2.9,428.43C1.55,421.74.66,407,.25,395.61.08,390.91,0,384.82,0,382l0-252.1c0-2.8.09-8.88.25-13.58C.71,104.86,1.62,90,3,83.28a110.37,110.37,0,0,1,9.27-27.72A98.59,98.59,0,0,1,55.7,12.18,110.21,110.21,0,0,1,83.57,2.9C90.26,1.55,105,.66,116.39.25,121.09.08,127.18,0,130,0l252.1,0c2.8,0,8.88.09,13.58.25C407.14.71,422,1.62,428.72,3a110.37,110.37,0,0,1,27.72,9.27A98.59,98.59,0,0,1,499.82,55.7a110.21,110.21,0,0,1,9.28,27.87c1.35,6.69,2.24,21.41,2.65,32.82.17,4.7.25,10.79.25,13.58Z"
+                />
+                <path
+                  class="cls-2"
+                  d="M379.56,131.67A172.4,172.4,0,0,0,256.67,80.73C161,80.73,83.05,158.64,83.05,254.42a173.47,173.47,0,0,0,23.2,86.82l-24.65,90,92.08-24.17a173.55,173.55,0,0,0,83,21.17h.07c95.73,0,173.69-77.91,173.69-173.69A172.73,172.73,0,0,0,379.53,131.7l0,0ZM256.72,399a144.17,144.17,0,0,1-73.52-20.14l-5.29-3.15L123.27,390l14.59-53.27-3.42-5.47a143.29,143.29,0,0,1-22.11-76.81C112.33,174.81,177.1,110,256.8,110A144.34,144.34,0,0,1,401.12,254.48c-.07,79.67-64.83,144.46-144.41,144.46v0ZM335.87,290.8c-4.32-2.2-25.68-12.67-29.65-14.12s-6.85-2.19-9.8,2.2-11.22,14.11-13.76,17-5.06,3.29-9.37,1.09-18.35-6.77-34.92-21.56c-12.88-11.5-21.61-25.74-24.15-30s-.29-6.71,1.92-8.83c2-1.93,4.32-5.06,6.51-7.6s2.88-4.32,4.32-7.26.74-5.42-.35-7.6-9.8-23.55-13.34-32.25c-3.49-8.51-7.12-7.32-9.79-7.47s-5.42-.13-8.29-.13a16,16,0,0,0-11.57,5.41c-4,4.32-15.2,14.86-15.2,36.22s15.54,42,17.72,44.91,30.61,46.76,74.14,65.54c10.34,4.44,18.42,7.11,24.72,9.18a60,60,0,0,0,27.32,1.71c8.35-1.23,25.68-10.49,29.31-20.62s3.63-18.83,2.55-20.62-3.91-3-8.29-5.22l0,0Z"
+                />
+              </svg>
+            </a>
+            <!-- TikTok -->
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                shape-rendering="geometricPrecision"
+                text-rendering="geometricPrecision"
+                image-rendering="optimizeQuality"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M256 0c141.385 0 256 114.615 256 256S397.385 512 256 512 0 397.385 0 256 114.615 0 256 0z"
+                />
+                <path
+                  fill="#2DCCD3"
+                  fill-rule="nonzero"
+                  d="M344.487 161.312c11.585 11.945 26.033 19.226 40.593 22.539v-8.971c-13.681-.969-27.993-5.274-40.593-13.568zm-83.689-59.166v200.601c0 26.281-18.888 43.185-41.855 43.185-7.619 0-14.854-1.781-21.142-5.071 7.979 10.188 20.578 16.048 34.395 16.048 22.968 0 41.855-16.905 41.855-43.208V113.1h36.401a100.278 100.278 0 01-2.434-10.954h-47.22zm-29.864 116.618v-9.939c-4.599-.766-9.196-1.015-13.006-1.015-51.818 0-95.206 41.586-95.206 93.155 0 33.855 16.476 62.795 41.517 79.926-17.445-17.31-28.264-41.54-28.264-68.971 0-51.48 43.253-93.043 94.959-93.156z"
+                />
+                <path
+                  fill="#F1204A"
+                  fill-rule="nonzero"
+                  d="M313.36 299.433c0 64.057-49.001 98.002-95.184 98.002-19.992 0-38.564-6.041-53.937-16.545 17.266 17.131 41.022 27.499 67.19 27.499 46.184 0 95.184-33.945 95.184-98.002v-104.38c-4.597-3.11-9.015-6.739-13.253-10.976v104.402zM197.801 340.86c-5.635-7.122-8.994-16.341-8.994-27.159 0-30.361 23.734-46.409 55.38-43.073v-50.849c-4.598-.766-9.196-1.014-13.028-1.014h-.226v40.886c-31.644-3.313-55.379 12.712-55.379 43.096 0 17.761 9.084 31.239 22.247 38.113zM385.08 183.851v37.979c-21.029 0-40.931-4.012-58.467-15.823 20.421 20.421 45.192 26.8 71.721 26.8v-46.972a82.367 82.367 0 01-13.254-1.984zm-40.593-22.54c-11.202-11.517-19.745-27.385-23.215-48.211h-10.819c6.176 22.517 18.888 38.227 34.034 48.211z"
+                />
+                <path
+                  fill="#fff"
+                  fill-rule="nonzero"
+                  d="M218.176 397.435c46.183 0 95.184-33.944 95.184-98.002V195.031c4.238 4.237 8.655 7.866 13.253 10.976 17.536 11.811 37.438 15.823 58.468 15.823v-37.979c-14.561-3.313-29.009-10.593-40.594-22.54-15.146-9.984-27.859-25.694-34.034-48.211h-36.402v200.601c0 26.303-18.888 43.208-41.856 43.208-13.816 0-26.415-5.86-34.394-16.048-13.163-6.875-22.247-20.353-22.247-38.114 0-30.384 23.734-46.409 55.379-43.096v-40.887c-51.705.113-94.958 41.676-94.958 93.156 0 27.431 10.819 51.661 28.264 68.971 15.372 10.503 33.945 16.544 53.937 16.544z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="index.html#about">About</a>
+          <a href="index.html#estimator">Paint Calculator</a>
+          <a href="index.html#products">Products</a>
+          <a href="index.html#services">Services</a>
+          <a href="index.html#gallery">Gallery</a>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="tel:+9779807039268">9807039268</a>
+          <a href="https://wa.me/9779807039268" target="_blank" rel="noopener"
+            >WhatsApp</a
+          >
+          <a href="#contact">Puspalal Chowk, Biratnagar</a>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-col newsletter">
+          <h4>Newsletter</h4>
+          <p>Get color trends &amp; offers.</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Your email" required />
+            <button type="submit" class="ripple" aria-label="Subscribe">
+              →
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom section-inner">
+        <span>&copy; 2026 Paint's Gallery. All rights reserved.</span>
+        <span>Puspalal Chowk, Biratnagar, Nepal</span>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="search-data.js"></script>
+    <script src="search.js"></script>
+  </body>
+</html>
