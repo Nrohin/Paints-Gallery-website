@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paintsgallery.com.np/sitemap.xml

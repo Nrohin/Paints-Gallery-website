@@ -6,129 +6,129 @@
 /* ---------- 1. CSS VARIABLES ---------- */
 :root {
   --primary: #0B2C66;
-  --primary-light: #17418c;
-  --accent-orange: #FF6B00;
-  --accent-blue: #3B82F6;
-  --success: #22C55E;
-  --bg: #F8FBFF;
-  --light: #FFFFFF;
-  --text: #1E293B;
-  --text-soft: #5b6b85;
+    --primary-light: #17418c;
+      --accent-orange: #FF6B00;
+        --accent-blue: #3B82F6;
+          --success: #22C55E;
+            --bg: #F8FBFF;
+              --light: #FFFFFF;
+                --text: #1E293B;
+                  --text-soft: #5b6b85;
 
-  --glass-bg: rgba(255, 255, 255, 0.55);
-  --glass-bg-strong: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.65);
-  --glass-shadow: 0 8px 32px rgba(11, 44, 102, 0.10);
+                    --glass-bg: rgba(255, 255, 255, 0.55);
+                      --glass-bg-strong: rgba(255, 255, 255, 0.7);
+                        --glass-border: rgba(255, 255, 255, 0.65);
+                          --glass-shadow: 0 8px 32px rgba(11, 44, 102, 0.10);
 
-  --gradient-brand: linear-gradient(120deg, var(--primary) 0%, var(--accent-blue) 45%,var(--primary) 100%);
-  --gradient-text: linear-gradient(100deg, var(--accent-orange), var(--accent-blue));
+                            --gradient-brand: linear-gradient(120deg, var(--primary) 0%, var(--accent-blue) 45%,var(--primary) 100%);
+                              --gradient-text: linear-gradient(100deg, var(--accent-orange), var(--accent-blue));
 
-  --font-display: 'Roboto', serif;
-  --font-body: 'Poppins', sans-serif;
+                                --font-display: 'Roboto', serif;
+                                  --font-body: 'Poppins', sans-serif;
 
-  --radius-lg: 28px;
-  --radius-md: 22px;
-  --radius-sm: 14px;
+                                    --radius-lg: 28px;
+                                      --radius-md: 22px;
+                                        --radius-sm: 14px;
 
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
+                                          --ease: cubic-bezier(0.22, 1, 0.36, 1);
+                                          }
 
-/* ---------- 2. RESET ---------- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; border: none; background: none; cursor: pointer; }
-ul { list-style: none; }
-input, textarea { font-family: inherit; }
+                                          /* ---------- 2. RESET ---------- */
+                                          * { box-sizing: border-box; margin: 0; padding: 0; }
+                                          html { scroll-behavior: smooth; }
+                                          img { max-width: 100%; display: block; }
+                                          a { color: inherit; text-decoration: none; }
+                                          button { font-family: inherit; border: none; background: none; cursor: pointer; }
+                                          ul { list-style: none; }
+                                          input, textarea { font-family: inherit; }
 
-/* ---------- 3. BASE / BACKGROUND ---------- */
-body {
-  font-family: var(--font-body);
-  color: var(--text);
-  overflow-x: hidden;
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.10) 0%, transparent 45%),
-    radial-gradient(circle at 88% 18%, rgba(255, 107, 0, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 20% 85%, rgba(34, 197, 94, 0.07) 0%, transparent 42%),
-    radial-gradient(circle at 92% 90%, rgba(11, 44, 102, 0.08) 0%, transparent 45%),
-    linear-gradient(180deg, #F8FBFF 0%, #FDF6EF 50%, #F3F8FF 100%);
-  background-attachment: fixed;
-  background-size: cover;
-  cursor: default;
-}
+                                          /* ---------- 3. BASE / BACKGROUND ---------- */
+                                          body {
+                                            font-family: var(--font-body);
+                                              color: var(--text);
+                                                overflow-x: hidden;
+                                                  background-color: var(--bg);
+                                                    background-image:
+                                                        radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.10) 0%, transparent 45%),
+                                                            radial-gradient(circle at 88% 18%, rgba(255, 107, 0, 0.08) 0%, transparent 40%),
+                                                                radial-gradient(circle at 20% 85%, rgba(34, 197, 94, 0.07) 0%, transparent 42%),
+                                                                    radial-gradient(circle at 92% 90%, rgba(11, 44, 102, 0.08) 0%, transparent 45%),
+                                                                        linear-gradient(180deg, #F8FBFF 0%, #FDF6EF 50%, #F3F8FF 100%);
+                                                                          background-attachment: fixed;
+                                                                            background-size: cover;
+                                                                              cursor: default;
+                                                                              }
 
-/* `background-attachment: fixed` forces a full-viewport repaint on every
-   scroll frame on mobile (esp. Android WebViews) — a major jank source.
-   Fall back to static scrolling background on small screens. */
-@media (max-width: 768px) {
-  body { background-attachment: scroll; }
-}
+                                                                              /* `background-attachment: fixed` forces a full-viewport repaint on every
+                                                                                 scroll frame on mobile (esp. Android WebViews) — a major jank source.
+                                                                                    Fall back to static scrolling background on small screens. */
+                                                                                    @media (max-width: 768px) {
+                                                                                      body { background-attachment: scroll; }
+                                                                                      }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  color: var(--primary);
-  line-height: 1.15;
-  font-weight: 600;
-}
+                                                                                      h1, h2, h3, h4 {
+                                                                                        font-family: var(--font-display);
+                                                                                          color: var(--primary);
+                                                                                            line-height: 1.15;
+                                                                                              font-weight: 600;
+                                                                                              }
 
-p { color: var(--text-soft); line-height: 1.7; }
+                                                                                              p { color: var(--text-soft); line-height: 1.7; }
 
-.text-gradient {
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+                                                                                              .text-gradient {
+                                                                                                background: var(--gradient-text);
+                                                                                                  -webkit-background-clip: text;
+                                                                                                    background-clip: text;
+                                                                                                      color: transparent;
+                                                                                                      }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-orange);
-  margin-bottom: 14px;
-}
-.eyebrow::before { content: '';  background: var(--accent-orange); }
+                                                                                                      .eyebrow {
+                                                                                                        display: inline-flex;
+                                                                                                          align-items: center;
+                                                                                                            gap: 8px;
+                                                                                                              font-family: var(--font-body);
+                                                                                                                font-weight: 600;
+                                                                                                                  font-size: 0.78rem;
+                                                                                                                    letter-spacing: 0.16em;
+                                                                                                                      text-transform: uppercase;
+                                                                                                                        color: var(--accent-orange);
+                                                                                                                          margin-bottom: 14px;
+                                                                                                                          }
+                                                                                                                          .eyebrow::before { content: '';  background: var(--accent-orange); }
 
-.section { padding: 55px 0; position: relative; }
-.section-tint { background: linear-gradient(180deg, rgba(59,130,246,0.04), rgba(255,107,0,0.03)); }
-.section-inner { max-width: 1220px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
+                                                                                                                          .section { padding: 55px 0; position: relative; }
+                                                                                                                          .section-tint { background: linear-gradient(180deg, rgba(59,130,246,0.04), rgba(255,107,0,0.03)); }
+                                                                                                                          .section-inner { max-width: 1220px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
 
-.section-head { max-width: 640px; margin-bottom: 56px; }
-.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-.section-head h2 { font-size: clamp(2rem, 3.4vw, 2.7rem); margin-bottom: 4px; }
-.section-head p { margin-top: 14px; }
+                                                                                                                          .section-head { max-width: 640px; margin-bottom: 56px; }
+                                                                                                                          .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+                                                                                                                          .section-head h2 { font-size: clamp(2rem, 3.4vw, 2.7rem); margin-bottom: 4px; }
+                                                                                                                          .section-head p { margin-top: 14px; }
 
-/* Tablet */
-@media (max-width: 720px) {
-    .section{
-        padding: 70px 0;
-    }
+                                                                                                                          /* Tablet */
+                                                                                                                          @media (max-width: 720px) {
+                                                                                                                              .section{
+                                                                                                                                      padding: 70px 0;
+                                                                                                                                          }
 
-    .section-inner{
-        width:100%;
-        max-width:100%;
-        padding:0 16px;
-        box-sizing:border-box;
-    }
-}
+                                                                                                                                              .section-inner{
+                                                                                                                                                      width:100%;
+                                                                                                                                                              max-width:100%;
+                                                                                                                                                                      padding:0 16px;
+                                                                                                                                                                              box-sizing:border-box;
+                                                                                                                                                                                  }
+                                                                                                                                                                                  }
 
-/* Mobile */
-@media (max-width: 480px) {
-    .section{
-        padding:60px 0;
-    }
+                                                                                                                                                                                  /* Mobile */
+                                                                                                                                                                                  @media (max-width: 480px) {
+                                                                                                                                                                                      .section{
+                                                                                                                                                                                              padding:60px 0;
+                                                                                                                                                                                                  }
 
-    .section-inner{
-        padding:0 14px;
-    }
-}
+                                                                                                                                                                                                      .section-inner{
+                                                                                                                                                                                                              padding:0 14px;
+                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                  }
 
 /* ---------- 4. AMBIENT FLOATING BLOBS (OPTIMIZED: 2 blobs, reduced blur) ---------- */
 .bg-blobs {
@@ -984,8 +984,7 @@ display: none;
     min-width:0;
 }
 
-.contact-info,
-.contact-form{
+.contact-info{
     width:100%;
     max-width:100%;
     padding:36px;
@@ -1054,64 +1053,7 @@ display: none;
     border:0;
 }
 
-/* FORM */
 
-.contact-form{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-}
-
-.form-row{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:18px;
-}
-
-.form-field{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    min-width:0;
-}
-
-.form-field label{
-    font-size:.82rem;
-    font-weight:500;
-    color:var(--primary);
-}
-
-.form-field input,
-.form-field textarea{
-    width:100%;
-    max-width:100%;
-    padding:13px 16px;
-    border-radius:var(--radius-sm);
-    border:1.5px solid rgba(11,44,102,.15);
-    background:rgba(255,255,255,.6);
-    font-size:.92rem;
-    color:var(--text);
-    resize:vertical;
-    box-sizing:border-box;
-}
-
-.form-field input:focus,
-.form-field textarea:focus{
-    outline:none;
-    border-color:var(--accent-blue);
-    box-shadow:0 0 0 4px rgba(59,130,246,.12);
-}
-
-.form-success{
-    display:none;
-    font-size:.88rem;
-    color:var(--success);
-    text-align:center;
-}
-
-.form-success.show{
-    display:block;
-}
 
 /* ================= TABLET ================= */
 
@@ -1122,12 +1064,9 @@ display: none;
         gap:24px;
     }
 
-    .form-row{
-        grid-template-columns:1fr;
-    }
+  
 
-    .contact-info,
-    .contact-form{
+    .contact-info{
         padding:24px;
     }
 
@@ -1141,8 +1080,7 @@ display: none;
         gap:18px;
     }
 
-    .contact-info,
-    .contact-form{
+    .contact-info{
         padding:16px;
     }
 
@@ -1166,8 +1104,7 @@ display: none;
 
 @media (max-width:360px){
 
-    .contact-info,
-    .contact-form{
+    .contact-info{
         padding:12px;
     }
 

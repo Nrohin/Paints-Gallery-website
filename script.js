@@ -232,28 +232,7 @@ if (mobileMenuBtn && mobileNav) {
     });
   });
 
-  /* ---------- CONTACT FORM (client-side only) ---------- */
-  var contactForm = document.getElementById('contactForm');
-  var formSuccess = document.getElementById('formSuccess');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      formSuccess.classList.add('show');
-      contactForm.reset();
-      setTimeout(function () { formSuccess.classList.remove('show'); }, 5000);
-    });
-  }
 
-  /* ---------- NEWSLETTER FORM ---------- */
-  var newsletterForm = document.getElementById('newsletterForm');
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var input = newsletterForm.querySelector('input');
-      input.value = '';
-      input.placeholder = 'Subscribed! 🎉';
-    });
-  }
 
   /* ---------- BACK TO TOP ---------- */
   var backToTop = document.getElementById('backToTop');
