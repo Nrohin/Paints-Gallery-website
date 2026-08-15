@@ -13,42 +13,67 @@ document.addEventListener('DOMContentLoaded', function () {
   // Fallback in case 'load' already fired or is slow
   setTimeout(function () { loader.classList.add('hide'); }, 2500);
 
-  /* ---------- SCROLL PROGRESS BAR ---------- */
+  /* ---------- SCROLL PROGRESS BAR + NAVBAR + ACTIVE LINK + BACK TO TOP (CONSOLIDATED) ---------- */
   var progressBar = document.getElementById('scrollProgress');
-  function updateProgress() {
-    var scrollTop = window.scrollY;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    progressBar.style.width = pct + '%';
-  }
-
-  /* ---------- NAVBAR SHRINK + ACTIVE LINK ---------- */
   var navbar = document.getElementById('navbar');
   var navLinks = document.querySelectorAll('.nav-link');
   var sections = document.querySelectorAll('main > section[id], .section[id]');
+  var backToTop = document.getElementById('backToTop');
 
-  function updateNavbar() {
-    if (window.scrollY > 40) navbar.classList.add('scrolled');
-    else navbar.classList.remove('scrolled');
-  }
-
-  function updateActiveLink() {
-    var scrollPos = window.scrollY + 160;
-    var current = 'home';
+  // Cache section positions for active link calculation
+  var sectionPositions = [];
+  function cacheSectionPositions() {
+    sectionPositions = [];
     sections.forEach(function (sec) {
-      if (scrollPos >= sec.offsetTop) current = sec.id;
+      sectionPositions.push({
+        id: sec.id,
+        top: sec.offsetTop
+      });
     });
-    navLinks.forEach(function (link) {
-      link.classList.toggle('active', link.dataset.section === current);
+  }
+  cacheSectionPositions();
+  // Recalculate on resize (debounced)
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(cacheSectionPositions, 150);
+  }, { passive: true });
+
+  // Single rAF loop for all scroll-dependent updates
+  var scrollScheduled = false;
+  function onScroll() {
+    if (scrollScheduled) return;
+    scrollScheduled = true;
+    requestAnimationFrame(function () {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+      // Progress bar
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+
+      // Navbar shrink
+      if (scrollTop > 40) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+
+      // Active link (using cached positions)
+      var scrollPos = scrollTop + 160;
+      var current = 'home';
+      for (var i = 0; i < sectionPositions.length; i++) {
+        if (scrollPos >= sectionPositions[i].top) current = sectionPositions[i].id;
+      }
+      navLinks.forEach(function (link) {
+        link.classList.toggle('active', link.dataset.section === current);
+      });
+
+      // Back to top
+      backToTop.classList.toggle('show', scrollTop > 500);
+
+      scrollScheduled = false;
     });
   }
 
-  window.addEventListener('scroll', function () {
-    updateProgress();
-    updateNavbar();
-    updateActiveLink();
-    toggleBackToTop();
-  }, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   /* ---------- MOBILE NAV TOGGLE ---------- */
  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
@@ -91,26 +116,50 @@ if (mobileMenuBtn && mobileNav) {
 }
 
 
-  /* ---------- CURSOR GLOW ---------- */
+  /* ---------- CURSOR GLOW (disabled on touch devices) ---------- */
   var cursorGlow = document.getElementById('cursorGlow');
-  window.addEventListener('mousemove', function (e) {
-    cursorGlow.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px) translate(-50%,-50%)';
-  });
+  var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (!isTouchDevice && cursorGlow) {
+    var cursorScheduled = false;
+    window.addEventListener('mousemove', function (e) {
+      if (cursorScheduled) return;
+      cursorScheduled = true;
+      requestAnimationFrame(function () {
+        cursorGlow.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px) translate(-50%,-50%)';
+        cursorScheduled = false;
+      });
+    }, { passive: true });
+  }
 
   
 
-  /* ---------- HERO MOUSE PARALLAX ---------- */
+  /* ---------- HERO MOUSE PARALLAX (throttled, transform3d) ---------- */
   var heroFrame = document.getElementById('heroParallax');
   var heroSection = document.getElementById('heroSection');
   if (heroFrame && heroSection) {
+    var parallaxScheduled = false;
+    var heroRect = heroSection.getBoundingClientRect();
+    // Update rect on scroll/resize
+    window.addEventListener('scroll', function () {
+      heroRect = heroSection.getBoundingClientRect();
+    }, { passive: true });
+    window.addEventListener('resize', function () {
+      heroRect = heroSection.getBoundingClientRect();
+    }, { passive: true });
+
     heroSection.addEventListener('mousemove', function (e) {
-      var rect = heroSection.getBoundingClientRect();
-      var x = (e.clientX - rect.left) / rect.width - 0.5;
-      var y = (e.clientY - rect.top) / rect.height - 0.5;
-      heroFrame.style.transform = 'rotateY(' + (x * 6) + 'deg) rotateX(' + (-y * 6) + 'deg)';
-    });
+      if (parallaxScheduled) return;
+      parallaxScheduled = true;
+      requestAnimationFrame(function () {
+        var x = (e.clientX - heroRect.left) / heroRect.width - 0.5;
+        var y = (e.clientY - heroRect.top) / heroRect.height - 0.5;
+        // Use transform3d instead of rotate for better performance
+        heroFrame.style.transform = 'perspective(1000px) rotateY(' + (x * 6) + 'deg) rotateX(' + (-y * 6) + 'deg) translateZ(0)';
+        parallaxScheduled = false;
+      });
+    }, { passive: true });
     heroSection.addEventListener('mouseleave', function () {
-      heroFrame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      heroFrame.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0)';
     });
   }
 

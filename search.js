@@ -532,9 +532,15 @@
   }
 
   var pgHandleInput = pgDebounce(function (value) {
+    // Minimum query length check to avoid unnecessary searches
+    if (value.trim().length < 2 && value.trim().length !== 0) {
+      pgSearchState.query = value;
+      pgRender();
+      return;
+    }
     pgSearchState.query = value;
     pgRender();
-  }, 120);
+  }, 300);
 
   function pgWireEvents() {
     // Open triggers
