@@ -311,10 +311,6 @@
                 </div>
               </div>
             </div>
-            <div class="floating-particles" aria-hidden="true">
-              <span></span><span></span><span></span><span></span><span></span
-              ><span></span>
-            </div>
           </div>
         </div>
       </section>
@@ -1015,75 +1011,77 @@
         </div>
       </section>
 
-      <!-- ============ PAINT ESTIMATION CALCULATOR ============ -->
+      <!-- ============ PAINT ESTIMATION CALCULATOR — WIZARD ============ -->
       <section class="section" id="estimator">
         <div class="section-inner">
           <div class="section-head center reveal-up">
             <span class="eyebrow">Plan Your Project</span>
             <h2>Paint Estimation Calculator</h2>
-            <p>
-              Answer a few quick questions and we'll estimate exactly how much
-              paint your project needs.
-            </p>
+            <p>Answer a few quick questions and we'll estimate exactly how much paint your project needs.</p>
           </div>
 
           <div class="glass calc-shell reveal-up">
+            <!-- ───── STEP INDICATOR ───── -->
+            <nav class="calc-progress" id="calcProgress" aria-label="Calculator steps">
+              <div class="calc-progress-item active" data-step="1">
+                <span class="calc-progress-dot"><span class="calc-progress-num">1</span><span class="calc-progress-check">✓</span></span>
+                <span class="calc-progress-label">Project</span>
+                <span class="calc-progress-line"></span>
+              </div>
+              <div class="calc-progress-item" data-step="2">
+                <span class="calc-progress-dot"><span class="calc-progress-num">2</span><span class="calc-progress-check">✓</span></span>
+                <span class="calc-progress-label">Dimensions</span>
+                <span class="calc-progress-line"></span>
+              </div>
+              <div class="calc-progress-item" data-step="3">
+                <span class="calc-progress-dot"><span class="calc-progress-num">3</span><span class="calc-progress-check">✓</span></span>
+                <span class="calc-progress-label">Surface</span>
+                <span class="calc-progress-line"></span>
+              </div>
+              <div class="calc-progress-item" data-step="4">
+                <span class="calc-progress-dot"><span class="calc-progress-num">4</span><span class="calc-progress-check">✓</span></span>
+                <span class="calc-progress-label">Paint</span>
+                <span class="calc-progress-line"></span>
+              </div>
+              <div class="calc-progress-item" data-step="5">
+                <span class="calc-progress-dot"><span class="calc-progress-num">5</span><span class="calc-progress-check">✓</span></span>
+                <span class="calc-progress-label">Result</span>
+              </div>
+            </nav>
+
             <form id="calcForm" novalidate>
-              <!-- PROJECT TYPE -->
-              <div class="calc-block" id="calcStep1">
-                <h3 class="calc-step-title">
-                  <span class="calc-num">1</span>What are you painting?
-                </h3>
+
+              <!-- ══════ STEP 1 — PROJECT TYPE ══════ -->
+              <div class="calc-panel is-active" data-panel="1">
+                <h3 class="calc-step-title"><span class="calc-num">1</span> What are you painting?</h3>
                 <div class="calc-option-grid calc-option-grid-2">
                   <label class="calc-option-card">
-                    <input
-                      type="radio"
-                      name="calcProjectType"
-                      value="interior"
-                      checked
-                    />
-                    <img
-                      src="assets/interior.jpg"
-                      style="border-radius: 18px"
-                    />
+                    <input type="radio" name="calcProjectType" value="interior" checked />
+                    <img src="assets/interior.jpg" style="border-radius:18px" alt="Interior Painting" />
                     <span class="calc-option-title">Interior Painting</span>
-                    <span class="calc-option-desc"
-                      >Rooms, ceilings & indoor walls</span
-                    >
+                    <span class="calc-option-desc">Rooms, ceilings &amp; indoor walls</span>
                   </label>
                   <label class="calc-option-card">
-                    <input
-                      type="radio"
-                      name="calcProjectType"
-                      value="exterior"
-                    />
-                    <img
-                      src="assets/exterior.png"
-                      style="border-radius: 18px"
-                    />
+                    <input type="radio" name="calcProjectType" value="exterior" />
+                    <img src="assets/exterior.png" style="border-radius:18px" alt="Exterior Painting" />
                     <span class="calc-option-title">Exterior Painting</span>
-                    <span class="calc-option-desc"
-                      >Full building & compound walls</span
-                    >
+                    <span class="calc-option-desc">Full building &amp; compound walls</span>
                   </label>
+                </div>
+                <div class="calc-nav">
+                  <button type="button" class="calc-btn-reset" id="calcResetBtn">Reset</button>
+                  <button type="button" class="btn btn-primary ripple calc-btn-next" id="calcNext1">Next &rarr;</button>
                 </div>
               </div>
 
-              <!-- DIMENSIONS (content swaps based on project type above) -->
-              <div class="calc-block" id="calcStep2">
-                <!-- INTERIOR: room repeater -->
+              <!-- ══════ STEP 2 — DIMENSIONS ══════ -->
+              <div class="calc-panel" data-panel="2" hidden>
+                <!-- ─── INTERIOR ─── -->
                 <div id="calcInteriorPanel">
                   <div class="calc-step-head">
-                    <h3 class="calc-step-title">
-                      <span class="calc-num">2</span>Room dimensions
-                    </h3>
-                    <button
-                      type="button"
-                      class="calc-link-btn"
-                      id="calcToggleDefaults"
-                    >
-                      <span style="color: #ff6b00">Click here</span> to Edit
-                      door/window sizes
+                    <h3 class="calc-step-title"><span class="calc-num">2</span> Room dimensions</h3>
+                    <button type="button" class="calc-link-btn" id="calcToggleDefaults">
+                      <span style="color:#ff6b00">Click here</span> to Edit door/window sizes
                     </button>
                   </div>
 
@@ -1092,55 +1090,23 @@
                       <div class="calc-field">
                         <label>Door size — width × height (m)</label>
                         <div class="calc-inline-pair">
-                          <input
-                            type="number"
-                            id="calcDoorW"
-                            value="0.9"
-                            min="0.1"
-                            step="0.05"
-                          />
-                          <input
-                            type="number"
-                            id="calcDoorH"
-                            value="2.1"
-                            min="0.1"
-                            step="0.05"
-                          />
+                          <input type="number" id="calcDoorW" value="0.9" min="0.1" step="0.05" />
+                          <input type="number" id="calcDoorH" value="2.1" min="0.1" step="0.05" />
                         </div>
                       </div>
                       <div class="calc-field">
                         <label>Window size — width × height (m)</label>
                         <div class="calc-inline-pair">
-                          <input
-                            type="number"
-                            id="calcWindowW"
-                            value="1.2"
-                            min="0.1"
-                            step="0.05"
-                          />
-                          <input
-                            type="number"
-                            id="calcWindowH"
-                            value="1.2"
-                            min="0.1"
-                            step="0.05"
-                          />
+                          <input type="number" id="calcWindowW" value="1.2" min="0.1" step="0.05" />
+                          <input type="number" id="calcWindowH" value="1.2" min="0.1" step="0.05" />
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div id="calcRoomsWrap">
-                    <!-- room blocks injected by JS -->
-                  </div>
+                  <div id="calcRoomsWrap"></div>
 
-                  <button
-                    type="button"
-                    class="btn btn-outline calc-add-room"
-                    id="addRoomBtn"
-                  >
-                    + Add Another Room
-                  </button>
+                  <button type="button" class="btn btn-outline calc-add-room" id="addRoomBtn">+ Add Another Room</button>
 
                   <div class="calc-subtotal">
                     <span>Total interior paintable area</span>
@@ -1148,11 +1114,33 @@
                   </div>
                 </div>
 
-                <!-- EXTERIOR: building form -->
-                <div id="calcExteriorPanel" style="display: none">
-                  <h3 class="calc-step-title">
-                    <span class="calc-num">2</span>Building dimensions
-                  </h3>
+                <!-- ─── EXTERIOR ─── -->
+                <div id="calcExteriorPanel" style="display:none">
+                  <div class="calc-step-head">
+                    <h3 class="calc-step-title"><span class="calc-num">2</span> Building dimensions</h3>
+                    <button type="button" class="calc-link-btn" id="calcExtToggleDefaults">
+                      <span style="color:#ff6b00">Click here</span> to Edit door/window sizes
+                    </button>
+                  </div>
+
+                  <div class="calc-defaults" id="calcExteriorDefaultsPanel" style="display:none">
+                    <div class="calc-field-row">
+                      <div class="calc-field">
+                        <label>Door size — width × height (m)</label>
+                        <div class="calc-inline-pair">
+                          <input type="number" id="calcExtDoorW" value="0.9" min="0.1" step="0.05" />
+                          <input type="number" id="calcExtDoorH" value="2.1" min="0.1" step="0.05" />
+                        </div>
+                      </div>
+                      <div class="calc-field">
+                        <label>Window size — width × height (m)</label>
+                        <div class="calc-inline-pair">
+                          <input type="number" id="calcExtWindowW" value="1.2" min="0.1" step="0.05" />
+                          <input type="number" id="calcExtWindowH" value="1.2" min="0.1" step="0.05" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="calc-field-row calc-unit-row">
                     <div class="calc-field">
@@ -1166,74 +1154,32 @@
 
                   <div class="calc-field-row">
                     <div class="calc-field">
-                      <label>Building length</label
-                      ><input
-                        type="number"
-                        id="calcExtLength"
-                        class="calc-input"
-                        min="0.1"
-                        step="0.1"
-                        placeholder="e.g. 40"
-                      />
+                      <label>Building length</label>
+                      <input type="number" id="calcExtLength" class="calc-input" min="0.1" step="0.1" placeholder="e.g. 40" />
                     </div>
                     <div class="calc-field">
-                      <label>Building width</label
-                      ><input
-                        type="number"
-                        id="calcExtWidth"
-                        class="calc-input"
-                        min="0.1"
-                        step="0.1"
-                        placeholder="e.g. 30"
-                      />
+                      <label>Building width</label>
+                      <input type="number" id="calcExtWidth" class="calc-input" min="0.1" step="0.1" placeholder="e.g. 30" />
                     </div>
                   </div>
                   <div class="calc-field-row">
                     <div class="calc-field">
-                      <label>Height per floor</label
-                      ><input
-                        type="number"
-                        id="calcExtHeight"
-                        class="calc-input"
-                        min="0.1"
-                        step="0.1"
-                        placeholder="e.g. 10"
-                      />
+                      <label>Height per floor</label>
+                      <input type="number" id="calcExtHeight" class="calc-input" min="0.1" step="0.1" placeholder="e.g. 10" />
                     </div>
                     <div class="calc-field">
-                      <label>Number of floors</label
-                      ><input
-                        type="number"
-                        id="calcExtFloors"
-                        class="calc-input"
-                        min="1"
-                        step="1"
-                        value="1"
-                      />
+                      <label>Number of floors</label>
+                      <input type="number" id="calcExtFloors" class="calc-input" min="1" step="1" value="1" />
                     </div>
                   </div>
                   <div class="calc-field-row">
                     <div class="calc-field">
-                      <label>Doors</label
-                      ><input
-                        type="number"
-                        id="calcExtDoors"
-                        class="calc-input"
-                        min="0"
-                        step="1"
-                        value="0"
-                      />
+                      <label>Doors</label>
+                      <input type="number" id="calcExtDoors" class="calc-input" min="0" step="1" value="0" />
                     </div>
                     <div class="calc-field">
-                      <label>Windows</label
-                      ><input
-                        type="number"
-                        id="calcExtWindows"
-                        class="calc-input"
-                        min="0"
-                        step="1"
-                        value="0"
-                      />
+                      <label>Windows</label>
+                      <input type="number" id="calcExtWindows" class="calc-input" min="0" step="1" value="0" />
                     </div>
                   </div>
 
@@ -1241,30 +1187,14 @@
                     <input type="checkbox" id="calcHasCompound" />
                     <span>Include compound wall</span>
                   </label>
-                  <div
-                    class="calc-field-row calc-conditional"
-                    id="calcCompoundFields"
-                    style="display: none"
-                  >
+                  <div class="calc-field-row calc-conditional" id="calcCompoundFields" style="display:none">
                     <div class="calc-field">
-                      <label>Compound wall length</label
-                      ><input
-                        type="number"
-                        id="calcCompoundLength"
-                        class="calc-input"
-                        min="0"
-                        step="0.1"
-                      />
+                      <label>Compound wall length</label>
+                      <input type="number" id="calcCompoundLength" class="calc-input" min="0" step="0.1" />
                     </div>
                     <div class="calc-field">
-                      <label>Compound wall height</label
-                      ><input
-                        type="number"
-                        id="calcCompoundHeight"
-                        class="calc-input"
-                        min="0"
-                        step="0.1"
-                      />
+                      <label>Compound wall height</label>
+                      <input type="number" id="calcCompoundHeight" class="calc-input" min="0" step="0.1" />
                     </div>
                   </div>
 
@@ -1272,21 +1202,10 @@
                     <input type="checkbox" id="calcHasPillars" />
                     <span>Include boundary pillars</span>
                   </label>
-                  <div
-                    class="calc-field-row calc-conditional"
-                    id="calcPillarFields"
-                    style="display: none"
-                  >
+                  <div class="calc-field-row calc-conditional" id="calcPillarFields" style="display:none">
                     <div class="calc-field">
-                      <label>Additional pillar surface area (m²)</label
-                      ><input
-                        type="number"
-                        id="calcPillarArea"
-                        class="calc-input"
-                        min="0"
-                        step="0.1"
-                        placeholder="e.g. 8"
-                      />
+                      <label>Additional pillar surface area (m²)</label>
+                      <input type="number" id="calcPillarArea" class="calc-input" min="0" step="0.1" placeholder="e.g. 8" />
                     </div>
                   </div>
 
@@ -1297,21 +1216,19 @@
                 </div>
 
                 <p class="calc-error" id="calcStep2Error"></p>
+
+                <div class="calc-nav">
+                  <button type="button" class="calc-btn-back" id="calcBack2">&larr; Back</button>
+                  <button type="button" class="btn btn-primary ripple calc-btn-next" id="calcNext2">Next &rarr;</button>
+                </div>
               </div>
 
-              <!-- SURFACE TYPE -->
-              <div class="calc-block" id="calcStep3">
-                <h3 class="calc-step-title">
-                  <span class="calc-num">3</span>What's the surface condition?
-                </h3>
+              <!-- ══════ STEP 3 — SURFACE TYPE ══════ -->
+              <div class="calc-panel" data-panel="3" hidden>
+                <h3 class="calc-step-title"><span class="calc-num">3</span> What's the surface condition?</h3>
                 <div class="calc-option-grid calc-option-grid-4">
                   <label class="calc-option-card calc-option-card-sm">
-                    <input
-                      type="radio"
-                      name="calcSurface"
-                      value="new"
-                      checked
-                    />
+                    <input type="radio" name="calcSurface" value="new" checked />
                     <span class="calc-option-title">New Wall</span>
                   </label>
                   <label class="calc-option-card calc-option-card-sm">
@@ -1327,61 +1244,64 @@
                     <span class="calc-option-title">Smooth Surface</span>
                   </label>
                 </div>
+                <div class="calc-nav">
+                  <button type="button" class="calc-btn-back" id="calcBack3">&larr; Back</button>
+                  <button type="button" class="btn btn-primary ripple calc-btn-next" id="calcNext3">Next &rarr;</button>
+                </div>
               </div>
 
-              <!-- PAINT SELECTION -->
-              <div class="calc-block" id="calcStep4">
-                <h3 class="calc-step-title">
-                  <span class="calc-num">4</span>Choose your paint
-                </h3>
-                <div class="calc-paint-grid" id="calcPaintGrid">
-                  <!-- injected by JS -->
+              <!-- ══════ STEP 4 — PAINT SELECTION (progressive reveal) ══════ -->
+              <div class="calc-panel" data-panel="4" hidden>
+                <h3 class="calc-step-title"><span class="calc-num">4</span> Choose your paint</h3>
+
+                <!-- substep 4a — paint cards -->
+                <div class="calc-substep is-show" data-substep="a">
+                  <div class="calc-paint-grid" id="calcPaintGrid"></div>
+                  <div class="calc-substep-next">
+                    <button type="button" class="btn btn-primary ripple calc-substep-btn" id="calcSubNextA">Continue &rarr;</button>
+                  </div>
                 </div>
 
-                <div class="calc-field-row calc-field-row-3">
-                  <div class="calc-field">
-                    <label>Number of coats</label
-                    ><input
-                      type="number"
-                      id="calcCoats"
-                      class="calc-input"
-                      min="1"
-                      max="4"
-                      value="2"
-                    />
+                <!-- substep 4b — coats & finish -->
+                <div class="calc-substep" data-substep="b">
+                  <h4 class="calc-substep-title">Coats &amp; Finish</h4>
+                  <div class="calc-field-row calc-field-row-3">
+                    <div class="calc-field">
+                      <label>Number of coats</label>
+                      <div class="calc-stepper">
+                        <button type="button" class="calc-stepper-btn" id="calcCoatMinus" aria-label="Decrease coats">−</button>
+                        <input type="number" id="calcCoats" class="calc-input" min="1" max="4" value="2" readonly aria-label="Number of coats" />
+                        <button type="button" class="calc-stepper-btn" id="calcCoatPlus" aria-label="Increase coats">+</button>
+                      </div>
+                    </div>
+                    <div class="calc-field">
+                      <label>Finish</label>
+                      <select id="calcFinish" class="calc-input">
+                        <option value="matt">Matt</option>
+                        <option value="soft-sheen">Soft Sheen</option>
+                        <option value="gloss">Gloss</option>
+                      </select>
+                    </div>
+                    <div class="calc-field calc-field-checkbox">
+                      <label class="calc-checkbox-row"><input type="checkbox" id="calcDarkShade" /><span>Dark shade colour</span></label>
+                    </div>
                   </div>
-                  <div class="calc-field">
-                    <label>Finish</label>
-                    <select id="calcFinish" class="calc-input">
-                      <option value="matt">Matt</option>
-                      <option value="soft-sheen">Soft Sheen</option>
-                      <option value="gloss">Gloss</option>
-                    </select>
-                  </div>
-                  <div class="calc-field calc-field-checkbox">
-                    <label class="calc-checkbox-row"
-                      ><input type="checkbox" id="calcDarkShade" /><span
-                        >Dark shade colour</span
-                      ></label
-                    >
+                  <p class="calc-hint" id="calcDarkWarning" style="display:none">⚠ Dark shades generally require an additional coat — we've added one automatically.</p>
+                  <div class="calc-substep-nav">
+                    <button type="button" class="calc-btn-back calc-substep-back" data-back="a">&larr; Back</button>
+                    <button type="button" class="btn btn-primary ripple calc-substep-btn" id="calcSubNextB">Continue &rarr;</button>
                   </div>
                 </div>
-                <p class="calc-hint" id="calcDarkWarning" style="display: none">
-                  ⚠ Dark shades generally require an additional coat — we've
-                  added one automatically.
-                </p>
 
-                <div class="calc-advanced">
-                  <label class="calc-checkbox-row"
-                    ><input type="checkbox" id="calcIncludeAdvanced" /><span
-                      >Include primer, putty & cost estimate</span
-                    ></label
-                  >
-                  <div
-                    class="calc-field-row calc-field-row-3"
-                    id="calcAdvancedFields"
-                    style="display: none"
-                  >
+                <!-- substep 4c — advanced options -->
+                <div class="calc-substep" data-substep="c">
+                  <h4 class="calc-substep-title">Advanced Options</h4>
+                  <div class="calc-pill-group" role="radiogroup" aria-label="Include advanced estimate">
+                    <button type="button" class="calc-pill" data-adv="no" aria-pressed="true">Basic Estimate</button>
+                    <button type="button" class="calc-pill" data-adv="yes" aria-pressed="false">Include Primer, Putty &amp; Cost</button>
+                  </div>
+                  <input type="checkbox" id="calcIncludeAdvanced" style="display:none" />
+                  <div class="calc-field-row calc-field-row-3" id="calcAdvancedFields" style="display:none">
                     <div class="calc-field">
                       <label>Primer needed?</label>
                       <select id="calcPrimerNeeded" class="calc-input">
@@ -1397,144 +1317,84 @@
                       </select>
                     </div>
                     <div class="calc-field">
-                      <label>Price per litre (NPR, optional)</label
-                      ><input
-                        type="number"
-                        id="calcPricePerLitre"
-                        class="calc-input"
-                        min="0"
-                        step="1"
-                        placeholder="e.g. 450"
-                      />
+                      <label>Price per litre (NPR, optional)</label>
+                      <input type="number" id="calcPricePerLitre" class="calc-input" min="0" step="1" placeholder="e.g. 450" />
                     </div>
                   </div>
+                  <div class="calc-substep-nav">
+                    <button type="button" class="calc-btn-back calc-substep-back" data-back="b">&larr; Back</button>
+                    <button type="button" class="btn btn-primary ripple calc-btn-calculate" id="calcCalculateBtn">Calculate Estimate</button>
+                  </div>
+                  <p class="calc-error" id="calcStep4Error"></p>
                 </div>
-
-                <p class="calc-error" id="calcStep4Error"></p>
               </div>
 
-              <!-- ACTIONS -->
-              <div class="calc-actions">
-                <button type="button" class="calc-btn-reset" id="calcResetBtn">
-                  Reset
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary ripple"
-                  id="calcCalculateBtn"
-                >
-                  Calculate Estimate
-                </button>
-              </div>
+              <!-- ══════ STEP 5 — RESULT ══════ -->
+              <div class="calc-panel" data-panel="5" hidden>
+                <h3 class="calc-step-title"><span class="calc-num">5</span> Your Estimate</h3>
 
-              <!-- RESULTS (revealed after Calculate is pressed) -->
-              <div class="calc-results" id="calcResults">
-                <h3 class="calc-step-title calc-results-title">
-                  Your Estimate
-                </h3>
-
-                <div class="calc-result-grid">
-                  <div class="calc-result-card">
-                    <span class="calc-result-label">Paintable Area</span>
-                    <strong class="calc-result-value" id="resArea">—</strong>
-                  </div>
-                  <div class="calc-result-card">
-                    <span class="calc-result-label">Selected Paint</span>
-                    <strong class="calc-result-value" id="resPaint">—</strong>
-                  </div>
-                  <div class="calc-result-card">
-                    <span class="calc-result-label">Coverage</span>
-                    <strong class="calc-result-value" id="resCoverage"
-                      >—</strong
-                    >
-                  </div>
-                  <div class="calc-result-card">
-                    <span class="calc-result-label">Coats</span>
-                    <strong class="calc-result-value" id="resCoats">—</strong>
-                  </div>
-                </div>
-
-                <div class="calc-litres-band">
-                  <div><span>Minimum</span><strong id="resMin">—</strong></div>
-                  <div class="is-estimate">
-                    <span>Estimated</span><strong id="resEst">—</strong>
-                  </div>
-                  <div><span>Maximum</span><strong id="resMax">—</strong></div>
-                </div>
-
-                <div class="calc-purchase glass">
-                  <span class="calc-result-label">Recommended Purchase</span>
-                  <strong class="calc-purchase-combo" id="resPacks">—</strong>
-                </div>
-
-                <div
-                  class="calc-advanced-results"
-                  id="resAdvancedWrap"
-                  style="display: none"
-                >
-                  <div class="calc-mini-result">
-                    <span>Estimated Primer</span
-                    ><strong id="resPrimer">—</strong>
-                  </div>
-                  <div class="calc-mini-result">
-                    <span>Estimated Putty</span><strong id="resPutty">—</strong>
-                  </div>
-                  <div
-                    class="calc-mini-result"
-                    id="resCostWrap"
-                    style="display: none"
-                  >
-                    <span>Estimated Cost</span><strong id="resCost">—</strong>
-                  </div>
-                </div>
-                <!-- DOWNLOAD ESTIMATE (PDF) -->
-                <div class="calc-download-block" id="calcDownloadBlock">
-                  <div class="calc-field-row">
-                    <div class="calc-field">
-                      <label>Location</label>
-                      <input
-                        type="text"
-                        id="calcPdfLocation"
-                        class="calc-input"
-                        placeholder="e.g. Biratnagar"
-                      />
+                <div class="calc-results is-show" id="calcResults">
+                  <div class="calc-est-hero">
+                    <div class="calc-hero-card">
+                      <span class="calc-result-label">Paintable Area</span>
+                      <strong class="calc-result-value" id="resArea">—</strong>
                     </div>
-                    <div class="calc-field">
-                      <label>Customer Name (optional)</label>
-                      <input
-                        type="text"
-                        id="calcPdfCustomer"
-                        class="calc-input"
-                        placeholder="Customer name"
-                      />
+                    <div class="calc-hero-card">
+                      <span class="calc-result-label">Selected Paint</span>
+                      <strong class="calc-result-value" id="resPaint">—</strong>
+                    </div>
+                    <div class="calc-hero-card">
+                      <span class="calc-result-label">Coverage</span>
+                      <strong class="calc-result-value" id="resCoverage">—</strong>
+                    </div>
+                    <div class="calc-hero-card">
+                      <span class="calc-result-label">Coats</span>
+                      <strong class="calc-result-value" id="resCoats">—</strong>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    class="btn btn-primary ripple calc-btn-download"
-                    id="calcDownloadBtn"
-                  >
-                    Download Estimate (PDF)
-                  </button>
-                  <p class="calc-error" id="calcDownloadError"></p>
-                </div>
-                <p class="calc-disclaimer">
-                  This is an estimated paint requirement calculated using the
-                  manufacturer's standard coverage values under ideal
-                  application conditions. Actual consumption may vary depending
-                  on surface condition, application method, texture, wastage,
-                  and site conditions. Visit us at Puspalal Chowk or call
-                  <a href="tel:+9779714535759">9714535759</a> to confirm before
-                  purchase.
-                </p>
 
-                <a
-                  href="tel:+9779714535759"
-                  class="calc-btn-calculate calc-call-btn"
-                  id="calcCallBtn"
-                  >Call to Confirm — 9714535759</a
-                >
+                  <div class="calc-litres-band">
+                    <div><span>Minimum</span><strong id="resMin">—</strong></div>
+                    <div class="is-estimate"><span>Estimated</span><strong id="resEst">—</strong></div>
+                    <div><span>Maximum</span><strong id="resMax">—</strong></div>
+                  </div>
+
+                  <div class="calc-purchase glass">
+                    <span class="calc-result-label">Recommended Purchase</span>
+                    <strong class="calc-purchase-combo" id="resPacks">—</strong>
+                  </div>
+
+                  <div class="calc-advanced-results" id="resAdvancedWrap" style="display:none">
+                    <div class="calc-mini-result"><span>Estimated Primer</span><strong id="resPrimer">—</strong></div>
+                    <div class="calc-mini-result"><span>Estimated Putty</span><strong id="resPutty">—</strong></div>
+                    <div class="calc-mini-result" id="resCostWrap" style="display:none"><span>Estimated Cost</span><strong id="resCost">—</strong></div>
+                  </div>
+
+                  <!-- DOWNLOAD ESTIMATE (PDF) -->
+                  <div class="calc-download-block" id="calcDownloadBlock">
+                    <div class="calc-field-row">
+                      <div class="calc-field">
+                        <label>Location</label>
+                        <input type="text" id="calcPdfLocation" class="calc-input" placeholder="e.g. Biratnagar" />
+                      </div>
+                      <div class="calc-field">
+                        <label>Customer Name (optional)</label>
+                        <input type="text" id="calcPdfCustomer" class="calc-input" placeholder="Customer name" />
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-primary ripple calc-btn-download" id="calcDownloadBtn">Download Estimate (PDF)</button>
+                    <p class="calc-error" id="calcDownloadError"></p>
+                  </div>
+
+                  <p class="calc-disclaimer">This is an estimated paint requirement calculated using the manufacturer's standard coverage values under ideal application conditions. Actual consumption may vary depending on surface condition, application method, texture, wastage, and site conditions. Visit us at Puspalal Chowk or call <a href="tel:+9779714535759">9714535759</a> to confirm before purchase.</p>
+
+                  <div class="calc-nav">
+                    <button type="button" class="calc-btn-back" id="calcBack5">&larr; Recalculate</button>
+                    <a href="tel:+9779714535759" class="btn btn-primary ripple calc-call-btn" id="calcCallBtn">Call to Confirm — 9714535759</a>
+                  </div>
+                </div>
               </div>
+
             </form>
           </div>
         </div>
@@ -2095,7 +1955,7 @@
           />
          
           <p>
-            Genuine Nerolac &amp; KNP paints at Puspalal Chowk, Biratnagar —
+            Genuine KNP Nerolac paints at Puspalal Chowk, Biratnagar,
             colour advice you can trust.
           </p>
         </div>

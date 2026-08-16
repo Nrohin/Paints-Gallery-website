@@ -289,7 +289,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var calcResetBtn = document.getElementById('calcResetBtn');
   var calcResultsWrap = document.getElementById('calcResults');
 
-  var calcStep2 = document.getElementById('calcStep2');
   var calcStep2Error = document.getElementById('calcStep2Error');
   var calcStep4Error = document.getElementById('calcStep4Error');
 
@@ -301,6 +300,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var calcToggleDefaults = document.getElementById('calcToggleDefaults');
   var calcDefaultsPanel = document.getElementById('calcDefaultsPanel');
+  var calcExtToggleDefaults = document.getElementById('calcExtToggleDefaults');
+  var calcExtDefaultsPanel = document.getElementById('calcExteriorDefaultsPanel');
+  var calcExtDoorW = document.getElementById('calcExtDoorW');
+  var calcExtDoorH = document.getElementById('calcExtDoorH');
+  var calcExtWindowW = document.getElementById('calcExtWindowW');
+  var calcExtWindowH = document.getElementById('calcExtWindowH');
   var calcDoorW = document.getElementById('calcDoorW');
   var calcDoorH = document.getElementById('calcDoorH');
   var calcWindowW = document.getElementById('calcWindowW');
@@ -365,28 +370,15 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   function toMeters(value, unit) { return unit === 'ft' ? value * CALC_FT_TO_M : value; }
 
-  /* ---------- single-page Calculate / Reset ---------- */
-  calcCalculateBtn.addEventListener('click', function () {
-    calcStep2Error.textContent = '';
-    calcStep4Error.textContent = '';
+  /* ---------- single-page Calculate / Reset ----------
+     NOTE: The calculate/reset click handlers are now wired inside the
+     WIZARD ORCHESTRATION block (added further below). That block owns
+     step navigation, so the original single-page handlers were removed
+     to avoid double-firing. All calculation logic below is untouched. */
 
-    if (!validateStep2()) {
-      calcResultsWrap.classList.remove('show');
-      document.getElementById('calcStep2').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-    if (!validateStep4()) {
-      calcResultsWrap.classList.remove('show');
-      document.getElementById('calcStep4').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-
-    calculateResults();
-    calcResultsWrap.classList.add('show');
-    calcResultsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-
-  calcResetBtn.addEventListener('click', resetCalculator);
+  // Reset is bound here; the wizard block below reassigns resetCalculator
+  // to also run wizard-state resets, so we reference the variable at click time.
+  calcResetBtn.addEventListener('click', function () { resetCalculator(); });
 
   calcForm.addEventListener('submit', function (e) { e.preventDefault(); });
 
@@ -456,7 +448,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
   calcToggleDefaults.addEventListener('click', function () {
     calcDefaultsPanel.classList.toggle('open');
-    calcToggleDefaults.textContent = calcDefaultsPanel.classList.contains('open') ? 'Hide door/window sizes' : 'Edit door/window sizes';
+    calcToggleDefaults.innerHTML = calcDefaultsPanel.classList.contains('open')
+      ? '<span style="color:#ff6b00">Hide</span> door/window sizes'
+      : '<span style="color:#ff6b00">Click here</span> to Edit door/window sizes';
+  });
+
+  calcExtToggleDefaults.addEventListener('click', function () {
+    calcExtDefaultsPanel.classList.toggle('open');
+    calcExtToggleDefaults.innerHTML = calcExtDefaultsPanel.classList.contains('open')
+      ? '<span style="color:#ff6b00">Hide</span> door/window sizes'
+      : '<span style="color:#ff6b00">Click here</span> to Edit door/window sizes';
   });
 
   /* ---------- recalculation ---------- */
@@ -495,8 +496,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var floors = parseFloat(calcExtFloors.value) || 1;
     var doors = parseFloat(calcExtDoors.value) || 0;
     var windows = parseFloat(calcExtWindows.value) || 0;
-    var doorW = parseFloat(calcDoorW.value) || 0.9, doorH = parseFloat(calcDoorH.value) || 2.1;
-    var winW = parseFloat(calcWindowW.value) || 1.2, winH = parseFloat(calcWindowH.value) || 1.2;
+    var doorW = parseFloat(calcExtDoorW.value) || 0.9, doorH = parseFloat(calcExtDoorH.value) || 2.1;
+    var winW = parseFloat(calcExtWindowW.value) || 1.2, winH = parseFloat(calcExtWindowH.value) || 1.2;
 
     var perimeter = 2 * (L + W);
     var totalHeight = H * floors;
@@ -516,8 +517,8 @@ document.addEventListener('DOMContentLoaded', function () {
     calcExteriorTotalEl.textContent = total.toFixed(1) + ' m²';
   }
 
-  calcStep2.addEventListener('input', handleStep2Change);
-  calcStep2.addEventListener('change', handleStep2Change);
+  calcForm.addEventListener('input', handleStep2Change);
+  calcForm.addEventListener('change', handleStep2Change);
 
   function handleStep2Change(e) {
     if (e.target === calcHasCompound) { calcCompoundFields.style.display = calcHasCompound.checked ? 'grid' : 'none'; }
@@ -626,6 +627,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function calculateResults() {
     var type = getProjectType();
     var area = (type === 'interior') ? calcInteriorAreaTotal : calcExteriorAreaTotal;
+    calcResultsWrap.classList.add('is-show');
     var surface = document.querySelector('input[name="calcSurface"]:checked').value;
     var factor = CALC_SURFACE_FACTORS[surface] || 1;
     var adjustedArea = area * factor;
@@ -677,7 +679,9 @@ document.addEventListener('DOMContentLoaded', function () {
     addRoom();
 
     calcDefaultsPanel.classList.remove('open');
-    calcToggleDefaults.textContent = 'Edit door/window sizes';
+    calcToggleDefaults.innerHTML = '<span style="color:#ff6b00">Click here</span> to Edit door/window sizes';
+    calcExtDefaultsPanel.classList.remove('open');
+    calcExtToggleDefaults.innerHTML = '<span style="color:#ff6b00">Click here</span> to Edit door/window sizes';
     calcCompoundFields.style.display = 'none';
     calcPillarFields.style.display = 'none';
     calcAdvancedFields.style.display = 'none';
@@ -693,7 +697,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     calcStep2Error.textContent = '';
     calcStep4Error.textContent = '';
-    calcResultsWrap.classList.remove('show');
+    calcResultsWrap.classList.remove('is-show');
 
     populatePaintGrid();
     document.getElementById('estimator').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -706,6 +710,258 @@ document.addEventListener('DOMContentLoaded', function () {
      which only runs when the Reset button is clicked. */
   populatePaintGrid();
   addRoom();
+
+
+  /* =======================================================================
+     WIZARD ORCHESTRATION — progressive multi-step navigation
+     Layer on top of the existing calc logic. Does NOT touch calculation
+     formulas, IDs, names or the PDF/PNG generators.
+     ======================================================================= */
+  var calcProgressItems = document.querySelectorAll('#calcProgress .calc-progress-item');
+  var calcPanels = document.querySelectorAll('#calcForm .calc-panel');
+  var currentStep = 1;
+
+  function showStep(step, direction) {
+    var forward = direction !== 'back';
+
+    // First, find the currently visible panel and animate it out
+    calcPanels.forEach(function (panel) {
+      var pStep = parseInt(panel.getAttribute('data-panel'), 10);
+      if (pStep === currentStep && pStep !== step) {
+        // This is the panel we're leaving - play exit animation
+        panel.classList.remove('is-active', 'is-back-active');
+        panel.classList.add(forward ? 'is-leaving' : 'is-back-leaving');
+      }
+    });
+
+    // After a brief moment, hide the leaving panel and show the entering one
+    setTimeout(function () {
+      calcPanels.forEach(function (panel) {
+        var pStep = parseInt(panel.getAttribute('data-panel'), 10);
+        if (pStep === currentStep && pStep !== step) {
+          // Now hide the panel that just finished its exit animation
+          panel.hidden = true;
+          panel.classList.remove('is-leaving', 'is-back-leaving');
+        }
+        if (pStep === step) {
+          // Show the new panel with enter animation
+          panel.hidden = false;
+          panel.classList.remove('is-leaving', 'is-back-leaving');
+          panel.classList.add(forward ? 'is-active' : 'is-back-active');
+        }
+      });
+
+      // update step indicator
+      calcProgressItems.forEach(function (item) {
+        var s = parseInt(item.getAttribute('data-step'), 10);
+        item.classList.remove('active', 'completed');
+        if (s === step) item.classList.add('active');
+        else if (s < step) item.classList.add('completed');
+      });
+
+      currentStep = step;
+      // bring the wizard top into view smoothly
+      var shell = document.getElementById('estimator');
+      if (shell) shell.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50); // small delay to let the leaving animation start
+  }
+
+  function goNext(step) { showStep(step, 'forward'); }
+  function goBack(step) { showStep(step, 'back'); }
+
+  /* ---- STEP 4 progressive substeps (a: paint → b: coats → c: advanced) ---- */
+  var calcSubsteps = document.querySelectorAll('#calcForm [data-substep]');
+  var calcSubOrder = ['a', 'b', 'c'];
+  function revealSubstep(key) {
+    calcSubsteps.forEach(function (sub) {
+      sub.classList.toggle('is-show', sub.getAttribute('data-substep') === key);
+    });
+  }
+
+  /* ---- coats stepper ---- */
+  var calcCoatMinus = document.getElementById('calcCoatMinus');
+  var calcCoatPlus = document.getElementById('calcCoatPlus');
+  function setCoats(val) {
+    val = Math.max(1, Math.min(4, val));
+    calcCoatsInput.value = val;
+  }
+  if (calcCoatMinus) calcCoatMinus.addEventListener('click', function () { setCoats(parseInt(calcCoatsInput.value, 10) - 1); });
+  if (calcCoatPlus) calcCoatPlus.addEventListener('click', function () { setCoats(parseInt(calcCoatsInput.value, 10) + 1); });
+
+  /* ---- advanced pills (drive hidden checkbox) ---- */
+  var calcAdvPills = document.querySelectorAll('#calcForm .calc-pill[data-adv]');
+  calcAdvPills.forEach(function (pill) {
+    pill.addEventListener('click', function () {
+      var on = pill.getAttribute('data-adv') === 'yes';
+      calcIncludeAdvanced.checked = on;
+      calcAdvPills.forEach(function (p) {
+        var active = p === pill;
+        p.classList.toggle('selected', active);
+        p.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      calcAdvancedFields.style.display = on ? 'grid' : 'none';
+    });
+  });
+
+  /* ---- paint card selection visual state ---- */
+  function syncPaintSelection() {
+    calcPaintGrid.querySelectorAll('.calc-paint-card').forEach(function (card) {
+      var input = card.querySelector('input');
+      card.classList.toggle('selected', input && input.checked);
+    });
+  }
+  calcPaintGrid.addEventListener('change', syncPaintSelection);
+
+  /* ---- project type cards visual state ---- */
+  function syncProjectSelection() {
+    document.querySelectorAll('input[name="calcProjectType"]').forEach(function (radio) {
+      radio.closest('.calc-option-card').classList.toggle('selected', radio.checked);
+    });
+  }
+  document.querySelectorAll('input[name="calcProjectType"]').forEach(function (radio) {
+    radio.addEventListener('change', syncProjectSelection);
+  });
+
+  /* ---- surface cards visual state ---- */
+  function syncSurfaceSelection() {
+    document.querySelectorAll('input[name="calcSurface"]').forEach(function (radio) {
+      radio.closest('.calc-option-card').classList.toggle('selected', radio.checked);
+    });
+  }
+  document.querySelectorAll('input[name="calcSurface"]').forEach(function (radio) {
+    radio.addEventListener('change', syncSurfaceSelection);
+  });
+
+  /* =======================================================================
+     WIRING — Step 1 → 2
+     ======================================================================= */
+  var calcNext1 = document.getElementById('calcNext1');
+  if (calcNext1) calcNext1.addEventListener('click', function () {
+    syncProjectSelection();
+    goNext(2);
+  });
+
+  /* =======================================================================
+     WIRING — Step 2 → 3 (validate dimensions first)
+     ======================================================================= */
+  var calcNext2 = document.getElementById('calcNext2');
+  var calcBack2 = document.getElementById('calcBack2');
+  if (calcNext2) calcNext2.addEventListener('click', function () {
+    if (!validateStep2()) {
+      // keep on step 2, error already shown
+      return;
+    }
+    goNext(3);
+  });
+  if (calcBack2) calcBack2.addEventListener('click', function () { goBack(1); });
+
+  /* =======================================================================
+     WIRING — Step 3 → 4
+     ======================================================================= */
+  var calcNext3 = document.getElementById('calcNext3');
+  var calcBack3 = document.getElementById('calcBack3');
+  if (calcNext3) calcNext3.addEventListener('click', function () {
+    syncSurfaceSelection();
+    populatePaintGrid();
+    syncPaintSelection();
+    revealSubstep('a');
+    goNext(4);
+  });
+  if (calcBack3) calcBack3.addEventListener('click', function () { goBack(2); });
+
+  /* =======================================================================
+     WIRING — Step 4 substeps + calculate
+     ======================================================================= */
+  var calcSubNextA = document.getElementById('calcSubNextA');
+  var calcSubNextB = document.getElementById('calcSubNextB');
+  var calcSubBackA = document.querySelector('#calcForm .calc-substep-back[data-back="a"]');
+  var calcSubBackB = document.querySelector('#calcForm .calc-substep-back[data-back="b"]');
+
+  if (calcSubNextA) calcSubNextA.addEventListener('click', function () {
+    syncPaintSelection();
+    // default coats when entering substep b
+    var product = getProductsForType()[getSelectedPaintIndex()];
+    if (product) calcCoatsInput.value = product.coats + (calcDarkShade.checked ? 1 : 0);
+    revealSubstep('b');
+  });
+  if (calcSubNextB) calcSubNextB.addEventListener('click', function () {
+    if (!validateStep4()) return;
+    revealSubstep('c');
+  });
+  if (calcSubBackA) calcSubBackA.addEventListener('click', function () { revealSubstep('a'); });
+  if (calcSubBackB) calcSubBackB.addEventListener('click', function () { revealSubstep('b'); });
+
+  // Calculate moves to Step 5
+  calcCalculateBtn.addEventListener('click', function () {
+    calcStep2Error.textContent = '';
+    calcStep4Error.textContent = '';
+    if (!validateStep2()) { goBack(2); return; }
+    if (!validateStep4()) { revealSubstep('b'); goToStep4(); return; }
+    calculateResults();
+    syncAdvancedPillsFromCheckbox();
+    goNext(5);
+  });
+
+  function goToStep4() {
+    // ensure we are on panel 4 (no animation conflict)
+    calcPanels.forEach(function (panel) {
+      var pStep = parseInt(panel.getAttribute('data-panel'), 10);
+      panel.hidden = true;
+      panel.classList.remove('is-active', 'is-leaving', 'is-back-active', 'is-back-leaving');
+      if (pStep === 4) { panel.hidden = false; panel.classList.add('is-active'); }
+    });
+    calcProgressItems.forEach(function (item) {
+      var s = parseInt(item.getAttribute('data-step'), 10);
+      item.classList.remove('active', 'completed');
+      if (s === 4) item.classList.add('active');
+      else if (s < 4) item.classList.add('completed');
+    });
+    currentStep = 4;
+  }
+
+  function syncAdvancedPillsFromCheckbox() {
+    calcAdvPills.forEach(function (p) {
+      var active = p.getAttribute('data-adv') === 'yes' && calcIncludeAdvanced.checked;
+      p.classList.toggle('selected', active);
+      p.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  /* =======================================================================
+     WIRING — Step 5 recalculate / back
+     ======================================================================= */
+  var calcBack5 = document.getElementById('calcBack5');
+  if (calcBack5) calcBack5.addEventListener('click', function () {
+    revealSubstep('a');
+    goBack(4);
+  });
+
+  /* =======================================================================
+     RESET — return to step 1, clear everything
+     ======================================================================= */
+  var _origReset = resetCalculator;
+  resetCalculator = function () {
+    _origReset();
+    syncProjectSelection();
+    syncSurfaceSelection();
+    syncPaintSelection();
+    // reset advanced pills to basic
+    calcIncludeAdvanced.checked = false;
+    calcAdvPills.forEach(function (p) {
+      var active = p.getAttribute('data-adv') === 'yes';
+      p.classList.toggle('selected', active);
+      p.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    calcAdvancedFields.style.display = 'none';
+    revealSubstep('a');
+    showStep(1, 'back');
+  };
+
+  /* ---- initial visual sync ---- */
+  syncProjectSelection();
+  syncSurfaceSelection();
+  syncPaintSelection();
+
 
   /* ---------- DOWNLOAD ESTIMATE (PDF) — native vector text, no rasterization ---------- */
   (function initCalcPdfDownload() {
