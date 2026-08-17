@@ -76,17 +76,22 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', onScroll, { passive: true });
 
   /* ---------- MOBILE NAV TOGGLE ---------- */
- const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 const mobileNav = document.getElementById("navLinks");
 
 if (mobileMenuBtn && mobileNav) {
 
-    mobileMenuBtn.addEventListener("click", function () {
-
+    function toggleMobileMenu() {
         mobileMenuBtn.classList.toggle("menu-open");
         mobileNav.classList.toggle("open");
+    }
 
-    });
+    // Handle both click and touchstart for iOS compatibility
+    mobileMenuBtn.addEventListener("click", toggleMobileMenu);
+    mobileMenuBtn.addEventListener("touchstart", function(e) {
+        e.preventDefault(); // Prevent double-tap zoom on iOS
+        toggleMobileMenu();
+    }, { passive: false });
 
     mobileNav.querySelectorAll("a").forEach(function(link){
 

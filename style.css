@@ -5,36 +5,45 @@
 
 /* ---------- 1. CSS VARIABLES ---------- */
 :root {
+  /* Light theme (default) */
   --primary: #0B2C66;
-    --primary-light: #17418c;
-      --accent-orange: #FF6B00;
-        --accent-blue: #3B82F6;
-          --success: #22C55E;
-            --bg: #F8FBFF;
-              --light: #FFFFFF;
-                --text: #1E293B;
-                  --text-soft: #5b6b85;
-                  --secondary-text: #5b6b85;
+  --primary-light: #17418c;
+  --accent-orange: #FF6B00;
+  --accent-blue: #3B82F6;
+  --success: #22C55E;
+  --bg: #F8FBFF;
+  --light: #FFFFFF;
+  --text: #1E293B;
+  --text-soft: #5b6b85;
+  --secondary-text: #5b6b85;
 
-                    --glass-bg: rgba(255, 255, 255, 0.55);
-                      --glass-bg-strong: rgba(255, 255, 255, 0.7);
-                        --glass-border: rgba(255, 255, 255, 0.65);
-                          --glass-shadow: 0 8px 32px rgba(11, 44, 102, 0.10);
+  --surface: rgba(255, 255, 255, 0.7);
+  --surface-elevated: rgba(255, 255, 255, 0.9);
+  --border: rgba(11, 44, 102, 0.12);
+  --border-strong: rgba(11, 44, 102, 0.2);
 
-                            --gradient-brand: linear-gradient(120deg, var(--primary) 0%, var(--accent-blue) 45%,var(--primary) 100%);
-                              --gradient-text: linear-gradient(100deg, var(--accent-orange), var(--accent-blue));
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-shadow: 0 8px 32px rgba(11, 44, 102, 0.10);
 
-                                --font-display: 'Roboto', serif;
-                                  --font-body: 'Poppins', sans-serif;
+  --gradient-brand: linear-gradient(120deg, var(--primary) 0%, var(--accent-blue) 45%, var(--primary) 100%);
+  --gradient-text: linear-gradient(100deg, var(--accent-orange), var(--accent-blue));
 
-                                    --radius-lg: 28px;
-                                      --radius-md: 22px;
-                                        --radius-sm: 14px;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
 
-                                          --ease: cubic-bezier(0.22, 1, 0.36, 1);
-                                          }
+  --radius-lg: 28px;
+  --radius-md: 22px;
+  --radius-sm: 14px;
 
-                                          /* ---------- 2. RESET ---------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Theme transition */
+  --theme-transition: 0.3s var(--ease);
+}
+
+/* ---------- 2. RESET ---------- */
                                           * { box-sizing: border-box; margin: 0; padding: 0; }
                                           html { scroll-behavior: smooth; }
                                           img { max-width: 100%; display: block; }
@@ -43,31 +52,45 @@
                                           ul { list-style: none; }
                                           input, textarea { font-family: inherit; }
 
+                                          /* Targeted theme transitions for theme-sensitive properties */
+                                          body, .glass, .glass-strong, .calc-option-card, .calc-wiz-card, .calc-dim-card,
+                                          .calc-paint-card, .calc-hero-card, .calc-result-card, .calc-room, .calc-input,
+                                          .calc-field input, .calc-field select, .calc-stepper, .calc-pill, .btn,
+                                          .btn-primary, .btn-outline, .footer, .navbar, .nav-link, .dropdown-menu,
+                                          .dropdown-item, .social-icons a, .newsletter-form input, .faq-question,
+                                          .contact-row, .mini-result, .feature-card, .service-card, .why-card,
+                                          .about-card, .hp-product-card, .testimonial-card, .stat {
+                                            transition: background-color var(--theme-transition), background-image var(--theme-transition),
+                                              color var(--theme-transition), border-color var(--theme-transition),
+                                              box-shadow var(--theme-transition), backdrop-filter var(--theme-transition);
+                                          }
+
                                           /* ---------- 3. BASE / BACKGROUND ---------- */
-                                          body {
-                                            font-family: var(--font-body);
-                                              color: var(--text);
-                                                overflow-x: hidden;
-                                                  background-color: var(--bg);
-                                                    background-image:
-                                                        radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.10) 0%, transparent 45%),
-                                                            radial-gradient(circle at 88% 18%, rgba(255, 107, 0, 0.08) 0%, transparent 40%),
-                                                                radial-gradient(circle at 20% 85%, rgba(34, 197, 94, 0.07) 0%, transparent 42%),
-                                                                    radial-gradient(circle at 92% 90%, rgba(11, 44, 102, 0.08) 0%, transparent 45%),
-                                                                        linear-gradient(180deg, #F8FBFF 0%, #FDF6EF 50%, #F3F8FF 100%);
-                                                                          background-attachment: fixed;
-                                                                            background-size: cover;
-                                                                              cursor: default;
-                                                                              }
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  overflow-x: hidden;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 88% 18%, rgba(255, 107, 0, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 20% 85%, rgba(34, 197, 94, 0.07) 0%, transparent 42%),
+    radial-gradient(circle at 92% 90%, rgba(11, 44, 102, 0.08) 0%, transparent 45%),
+    linear-gradient(180deg, #F8FBFF 0%, #FDF6EF 50%, #F3F8FF 100%);
+  background-attachment: fixed;
+  background-size: cover;
+  cursor: default;
+  transition: background-color var(--theme-transition), background-image var(--theme-transition);
+}
 
-                                                                              /* `background-attachment: fixed` forces a full-viewport repaint on every
-                                                                                 scroll frame on mobile (esp. Android WebViews) — a major jank source.
-                                                                                    Fall back to static scrolling background on small screens. */
-                                                                                    @media (max-width: 768px) {
-                                                                                      body { background-attachment: scroll; }
-                                                                                      }
+/* `background-attachment: fixed` forces a full-viewport repaint on every
+   scroll frame on mobile (esp. Android WebViews) — a major jank source.
+   Fall back to static scrolling background on small screens. */
+@media (max-width: 768px) {
+  body { background-attachment: scroll; }
+}
 
-                                                                                      h1, h2, h3, h4 {
+h1, h2, h3, h4 {
                                                                                         font-family: var(--font-display);
                                                                                           color: var(--primary);
                                                                                             line-height: 1.15;
@@ -184,7 +207,7 @@
   .product-card {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: rgba(255,255,255,0.92);
+    background: var(--surface-elevated);
   }
 }
 
@@ -377,7 +400,7 @@
     padding:10px 0;
     margin-top:10px;
 
-    background:#fff;
+    background:var(--light);
     border-radius:16px;
     box-shadow:0 18px 50px rgba(0,0,0,.12);
 
@@ -399,13 +422,13 @@
 .dropdown-item{
     display:block;
     padding:12px 18px;
-    color:#333;
+    color:var(--text);
     text-decoration:none;
     transition:.25s;
 }
 
 .dropdown-item:hover{
-    background:#f4f6f9;
+    background:var(--surface);
     color:var(--primary);
 }
 @media (max-width:980px){
@@ -525,7 +548,6 @@ display: none;
    TOGGLE
 =========================== */
 
-
 .mobile-menu-btn{
     display:none;
     width:48px;
@@ -536,6 +558,11 @@ display: none;
     align-items:center;
     justify-content:center;
     color:var(--primary);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .menu-bars{
@@ -641,6 +668,10 @@ display: none;
         visibility:visible;
 
         transform:translateY(0);
+
+        display:flex;
+
+        z-index:1000;
 
     }
 
@@ -1780,6 +1811,67 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .calc-btn-calculate:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -14px rgba(11, 44, 102, 0.65); }
 
 /* =====================================================================
+   CALCULATOR BUTTON BASE — unified sizing for all calc buttons
+   ===================================================================== */
+.calc-btn-reset,
+.calc-substep-btn,
+.calc-btn-download,
+.calc-call-btn,
+.calc-add-room {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 50px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+  text-decoration: none;
+}
+
+.calc-btn-reset {
+  border: 1.5px solid rgba(11, 44, 102, 0.2);
+  color: var(--primary);
+  background: rgba(255, 255, 255, 0.55);
+}
+.calc-btn-reset:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+
+.calc-substep-btn,
+.calc-btn-download {
+  background: var(--gradient-brand);
+  color: #fff;
+  box-shadow: 0 14px 30px -12px rgba(11, 44, 102, 0.55);
+  border: none;
+}
+.calc-substep-btn:hover:not(:disabled),
+.calc-btn-download:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -12px rgba(11, 44, 102, 0.65); }
+.calc-substep-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.calc-call-btn {
+  background: var(--gradient-brand);
+  color: #fff;
+  box-shadow: 0 14px 30px -12px rgba(11, 44, 102, 0.55);
+  border: none;
+}
+.calc-call-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -12px rgba(11, 44, 102, 0.65); }
+
+.calc-add-room {
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+}
+.calc-add-room:hover { border-color: var(--accent-orange); color: var(--accent-orange); background: rgba(255, 107, 0, 0.08); }
+
+/* Substep back button inherits from calc-btn-back */
+.calc-substep-back {
+  min-height: 50px;
+  padding: 14px 26px;
+}
+
+/* =====================================================================
    NAVIGATION (Back / Continue) — sticky-friendly, thumb-friendly
    ===================================================================== */
 .calc-nav {
@@ -1827,6 +1919,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .calc-nav-end { width: 100%; }
   .calc-nav-end .calc-btn-next { flex: 1; }
   .calc-btn-back { width: 100%; }
+  .calc-btn-reset,
+  .calc-substep-btn,
+  .calc-btn-download,
+  .calc-call-btn,
+  .calc-add-room,
+  .calc-btn-calculate,
+  .calc-substep-back { width: 100%; }
+  .calc-substep-nav { flex-direction: column-reverse; align-items: stretch; gap: 12px; }
+  .calc-substep-nav .calc-substep-back { width: 100%; }
+  .calc-substep-nav .calc-substep-btn { flex: 1; }
+  .calc-download-block .btn { width: 100%; }
 }
 
 /* =====================================================================
