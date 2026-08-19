@@ -75,38 +75,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ---------- MOBILE NAV TOGGLE ---------- */
+ /* ---------- MOBILE NAV TOGGLE ---------- */
 const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 const mobileNav = document.getElementById("navLinks");
 
 if (mobileMenuBtn && mobileNav) {
 
     function toggleMobileMenu() {
-        mobileMenuBtn.classList.toggle("menu-open");
-        mobileNav.classList.toggle("open");
+        const isOpen = mobileNav.classList.toggle("open");
+
+        mobileMenuBtn.classList.toggle("menu-open", isOpen);
+        mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
     }
 
-    // Handle both click and touchstart for iOS compatibility
+    // One event is enough — works on iOS, Android and desktop
     mobileMenuBtn.addEventListener("click", toggleMobileMenu);
-    mobileMenuBtn.addEventListener("touchstart", function(e) {
-        e.preventDefault(); // Prevent double-tap zoom on iOS
-        toggleMobileMenu();
-    }, { passive: false });
 
-    mobileNav.querySelectorAll("a").forEach(function(link){
-
-        link.addEventListener("click", function(){
-
-            mobileMenuBtn.classList.remove("menu-open");
+    // Close menu when a navigation link is clicked
+    mobileNav.querySelectorAll("a").forEach(function(link) {
+        link.addEventListener("click", function() {
             mobileNav.classList.remove("open");
-
+            mobileMenuBtn.classList.remove("menu-open");
+            mobileMenuBtn.setAttribute("aria-expanded", "false");
         });
-
     });
 
-    // Close when clicking outside
-    document.addEventListener("click", function (e) {
-
+    // Close when clicking/tapping outside
+    document.addEventListener("click", function(e) {
         if (
             mobileNav.classList.contains("open") &&
             !mobileNav.contains(e.target) &&
@@ -114,10 +109,9 @@ if (mobileMenuBtn && mobileNav) {
         ) {
             mobileNav.classList.remove("open");
             mobileMenuBtn.classList.remove("menu-open");
+            mobileMenuBtn.setAttribute("aria-expanded", "false");
         }
-
     });
-
 }
 
 
