@@ -10,23 +10,31 @@
       name="description"
       content="Paint's Gallery — premium paint showroom in Biratnagar, Nepal. Genuine KNP Nerolac paints, expert colour consultation, and professional painting services."
     />
-    <link rel="icon" type="image/webp" href="/assets/loader.webp">
-<link rel="apple-touch-icon" href="/assets/loader.webp">
+    <link rel="icon" type="image/webp" href="/assets/favicon.webp" sizes="32x32" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.webp" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://paintsgallery.com.np/" />
+    <meta name="theme-color" content="#17418c" />
+    <meta name="author" content="Paint's Gallery" />
+    <meta name="geo.region" content="NP" />
+    <meta name="geo.placename" content="Biratnagar" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://paintsgallery.com.np/" />
-    <meta property="og:title" content="Paint's Gallery — Premium KNP Nerolac Paint Showroom in Biratnagar" />
+    <meta property="og:title" content="Paint's Gallery | KNP Nerolac Paints & Colour Experts in Biratnagar, Nepal" />
     <meta property="og:description" content="Authorized KNP Nerolac dealer in Biratnagar. Genuine interior & exterior paints, primers, enamels, putty, distempers & waterproofing. Free paint calculator & color consultation." />
     <meta property="og:image" content="https://paintsgallery.com.np/assets/logo.png" />
+    <meta property="og:image:width" content="1772" />
+    <meta property="og:image:height" content="473" />
     <meta property="og:site_name" content="Paint's Gallery" />
     <meta property="og:locale" content="en_NP" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://paintsgallery.com.np/" />
-    <meta name="twitter:title" content="Paint's Gallery — Premium KNP Nerolac Paint Showroom in Biratnagar" />
+    <meta name="twitter:title" content="Paint's Gallery | KNP Nerolac Paints & Colour Experts in Biratnagar, Nepal" />
     <meta name="twitter:description" content="Authorized KNP Nerolac dealer in Biratnagar. Genuine paints, free calculator & color consultation. Visit Puspalal Chowk or call 9714535759." />
     <meta name="twitter:image" content="https://paintsgallery.com.np/assets/logo.png" />
 
@@ -41,6 +49,31 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="search.css" />
 
+    <!-- JSON-LD Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Paint's Gallery",
+      "alternateName": "Paints Gallery Nepal",
+      "url": "https://paintsgallery.com.np",
+      "logo": "https://paintsgallery.com.np/assets/logo.png",
+      "image": "https://paintsgallery.com.np/assets/logo.png",
+      "telephone": "+977-9714535759",
+      "description": "Paint's Gallery is an authorized dealer of KNP Nerolac Paints in Biratnagar, Nepal, offering genuine interior and exterior paints, colour consultation, paint estimation, and painting assistance.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Puspalal Chowk",
+        "addressLocality": "Biratnagar",
+        "addressRegion": "Koshi Province",
+        "addressCountry": "NP"
+      },
+      "sameAs": [
+        "https://www.facebook.com/paintsgallerybiratnagar"
+      ]
+    }
+    </script>
+
     <!-- JSON-LD Structured Data: LocalBusiness -->
     <script type="application/ld+json">
     {
@@ -49,10 +82,14 @@
       "name": "Paint's Gallery",
       "image": "https://paintsgallery.com.np/assets/logo.png",
       "telephone": "+977-9714535759",
+      "url": "https://paintsgallery.com.np",
+      "priceRange": "₨₨",
+      "description": "Authorized KNP Nerolac Paints dealer in Biratnagar, Nepal. Genuine interior & exterior paints, primers, enamels, putty, distempers and waterproofing, plus colour consultation and a free paint budget calculator.",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Puspalal Chowk",
         "addressLocality": "Biratnagar",
+        "addressRegion": "Koshi Province",
         "addressCountry": "NP"
       },
       "geo": {
@@ -60,22 +97,40 @@
         "latitude": 26.4525,
         "longitude": 87.2718
       },
-      "url": "https://paintsgallery.com.np",
       "openingHoursSpecification": [{
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "opens": "09:00",
         "closes": "17:00"
       }],
-      "priceRange": "₨₨",
       "brand": {
         "@type": "Brand",
         "name": "KNP Nerolac"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Biratnagar",
+        "addressCountry": "NP"
       },
       "sameAs": [
         "https://wa.me/9779714535759",
         "https://www.facebook.com/paintsgallerybiratnagar"
       ]
+    }
+    </script>
+
+    <!-- JSON-LD Structured Data: WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Paint's Gallery",
+      "url": "https://paintsgallery.com.np",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://paintsgallery.com.np/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
   </head>
