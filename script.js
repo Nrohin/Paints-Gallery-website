@@ -214,22 +214,34 @@ if (mobileMenuBtn && mobileNav) {
   counters.forEach(function (c) { counterObserver.observe(c); });
 
   
-  /* ---------- FAQ ACCORDION ---------- */
-  document.querySelectorAll('.faq-item').forEach(function (item) {
-    var question = item.querySelector('.faq-question');
-    var answer = item.querySelector('.faq-answer');
-    question.addEventListener('click', function () {
-      var isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(function (other) {
-        other.classList.remove('open');
-        other.querySelector('.faq-answer').style.maxHeight = null;
+  /* ---------- FAQ ACCORDION (works for both .faq-item on index.html and .faq-card on category pages) ---------- */
+  function initFaqAccordion(itemsSelector, questionSelector, answerSelector) {
+    document.querySelectorAll(itemsSelector).forEach(function (item) {
+      var question = item.querySelector(questionSelector);
+      var answer = item.querySelector(answerSelector);
+      if (!question || !answer) return;
+      question.addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
+        // Close all items in the same FAQ section
+        var section = item.closest('#faq');
+        if (section) {
+          section.querySelectorAll(itemsSelector).forEach(function (other) {
+            other.classList.remove('open');
+            other.querySelector(answerSelector).style.maxHeight = null;
+          });
+        }
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
       });
-      if (!isOpen) {
-        item.classList.add('open');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      }
     });
-  });
+  }
+
+  // Initialize for index.html pattern (.faq-item > .faq-question > .faq-answer)
+  initFaqAccordion('.faq-item', '.faq-question', '.faq-answer');
+  // Initialize for category pages pattern (.faq-card > h3 > p)
+  initFaqAccordion('.faq-card', 'h3', 'p');
 
 
 
