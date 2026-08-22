@@ -1,6 +1,6 @@
 {
   "name": "Paint's Gallery",
-  "short_name": "Paint's Gallery",
+  "short_name": "Paints Gallery",
   "description": "Authorized KNP Nerolac paint dealer in Biratnagar, Nepal. Interior & exterior paints, colour consultation, and paint budget calculator.",
   "start_url": "/",
   "display": "standalone",
