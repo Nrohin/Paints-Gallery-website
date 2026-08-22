@@ -1058,7 +1058,7 @@ document.addEventListener('DOMContentLoaded', function () {
       doc.setFont('helvetica', 'italic');
       doc.setFontSize(9.5);
       doc.setTextColor.apply(doc, GREY);
-      doc.text('Your Paint Expert.', textX, y + 5.5);
+      doc.text('Your Paint Partner.', textX, y + 5.5);
 
       y += 13;
       doc.setFont('helvetica', 'bold');
@@ -1201,7 +1201,7 @@ document.addEventListener('DOMContentLoaded', function () {
       doc.setFont('helvetica', 'italic');
       doc.setFontSize(7.5);
       doc.setTextColor.apply(doc, GREY);
-      doc.text('Your Paint Expert.', marginX, footerY + 4);
+      doc.text('Your Paint Partner.', marginX, footerY + 4);
 
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(7.5);

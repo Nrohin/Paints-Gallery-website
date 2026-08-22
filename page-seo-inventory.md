@@ -3,7 +3,7 @@
 ## Project Overview
 - **Website**: https://paintsgallery.com.np/
 - **Brand**: Paint's Gallery (consistent naming)
-- **Tagline**: Your Paint Expert
+- **Tagline**: Your Paint Partner
 - **Business**: Authorized dealer of KNP Nerolac Paints
 - **Location**: Puspalal Chowk, Biratnagar, Nepal
 - **Phone**: +977 9714535759
@@ -185,7 +185,7 @@
 | Element | SEO Action |
 |---------|------------|
 | **Brand Name** | Use "Paint's Gallery" consistently everywhere |
-| **Tagline** | "Your Paint Expert" |
+| **Tagline** | "Your Paint Partner" |
 | **Address** | Puspalal Chowk, Biratnagar, Nepal (consistent NAP) |
 | **Phone** | +977 9714535759 (clickable tel: link) |
 | **Email** | Need to verify if exists, add if available |
