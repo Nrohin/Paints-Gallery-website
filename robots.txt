@@ -1,4 +1,17 @@
+# robots.txt for Paint's Gallery
+# https://paintsgallery.com.np/
+
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://paintsgallery.com.np/sitemap.xml
+
+# Disallow private/admin paths (none currently exist)
+# Disallow: /admin/
+# Disallow: /private/
+# Disallow: /*.json$
+# Disallow: /*.xml$
+
+# Crawl-delay (optional, be respectful)
+Crawl-delay: 10

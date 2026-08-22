@@ -392,33 +392,43 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* ---------- ROOM REPEATER (interior) ---------- */
-  function roomTemplate() {
+  function roomTemplate(roomId) {
+    var idSuffix = roomId.replace('room', '');
+    var nameId = 'roomName' + idSuffix;
+    var lengthId = 'roomLength' + idSuffix;
+    var widthId = 'roomWidth' + idSuffix;
+    var heightId = 'roomHeight' + idSuffix;
+    var unitId = 'roomUnit' + idSuffix;
+    var doorsId = 'roomDoors' + idSuffix;
+    var windowsId = 'roomWindows' + idSuffix;
+    var ceilingId = 'roomCeiling' + idSuffix;
     return '' +
       '<div class="calc-room-head">' +
-        '<input type="text" class="calc-room-name calc-input" placeholder="Room name (optional)">' +
-        '<button type="button" class="calc-room-remove">Remove</button>' +
+        '<input type="text" class="calc-room-name calc-input" id="' + nameId + '" placeholder="Room name (optional)" aria-label="Room name (optional)">' +
+        '<button type="button" class="calc-room-remove" aria-label="Remove this room">Remove</button>' +
       '</div>' +
       '<div class="calc-field-row calc-field-row-3">' +
-        '<div class="calc-field"><label>Length</label><input type="number" class="calc-room-length calc-input" min="0.1" step="0.1" placeholder="e.g. 12"></div>' +
-        '<div class="calc-field"><label>Width</label><input type="number" class="calc-room-width calc-input" min="0.1" step="0.1" placeholder="e.g. 10"></div>' +
+        '<div class="calc-field"><label for="' + lengthId + '">Length</label><input type="number" class="calc-room-length calc-input" id="' + lengthId + '" min="0.1" step="0.1" placeholder="e.g. 12" aria-label="Room length"></div>' +
+        '<div class="calc-field"><label for="' + widthId + '">Width</label><input type="number" class="calc-room-width calc-input" id="' + widthId + '" min="0.1" step="0.1" placeholder="e.g. 10" aria-label="Room width"></div>' +
 
-        '<div class="calc-field"><label>Height</label><input type="number" class="calc-room-height calc-input" min="0.1" step="0.1" placeholder="e.g. 9"></div>' +
+        '<div class="calc-field"><label for="' + heightId + '">Height</label><input type="number" class="calc-room-height calc-input" id="' + heightId + '" min="0.1" step="0.1" placeholder="e.g. 9" aria-label="Room height"></div>' +
       '</div>' +
       '<div class="calc-field-row calc-field-row-3">' +
-        '<div class="calc-field"><label>Unit</label><select class="calc-room-unit calc-input"><option value="ft">Feet</option><option value="m">Meter</option></select></div>' +
-        '<div class="calc-field"><label>Doors</label><input type="number" class="calc-room-doors calc-input" min="0" step="1" value="1"></div>' +
-        '<div class="calc-field"><label>Windows</label><input type="number" class="calc-room-windows calc-input" min="0" step="1" value="1"></div>' +
+        '<div class="calc-field"><label for="' + unitId + '">Unit</label><select class="calc-room-unit calc-input" id="' + unitId + '" aria-label="Measurement unit"><option value="ft">Feet</option><option value="m">Meter</option></select></div>' +
+        '<div class="calc-field"><label for="' + doorsId + '">Doors</label><input type="number" class="calc-room-doors calc-input" id="' + doorsId + '" min="0" step="1" value="1" aria-label="Number of doors"></div>' +
+        '<div class="calc-field"><label for="' + windowsId + '">Windows</label><input type="number" class="calc-room-windows calc-input" id="' + windowsId + '" min="0" step="1" value="1" aria-label="Number of windows"></div>' +
       '</div>' +
-      '<label class="calc-checkbox-row"><input type="checkbox" class="calc-room-ceiling" checked><span>Include ceiling</span></label>' +
+      '<label class="calc-checkbox-row" for="' + ceilingId + '"><input type="checkbox" class="calc-room-ceiling" id="' + ceilingId + '" checked aria-label="Include ceiling"><span>Include ceiling</span></label>' +
       '<div class="calc-room-area">Area: <strong class="calc-room-area-value">0 m²</strong></div>';
   }
 
   function addRoom() {
     calcRoomCount++;
+    var roomId = 'room' + calcRoomCount;
     var div = document.createElement('div');
     div.className = 'calc-room';
-    div.dataset.roomId = 'room' + calcRoomCount;
-    div.innerHTML = roomTemplate();
+    div.dataset.roomId = roomId;
+    div.innerHTML = roomTemplate(roomId);
     calcRoomsWrap.appendChild(div);
     updateRoomRemoveButtons();
     recalcInterior();
@@ -561,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var label = document.createElement('label');
       label.className = 'calc-paint-card';
       label.innerHTML =
-        '<input type="radio" name="calcPaint" value="' + i + '"' + (i === 0 ? ' checked' : '') + '>' +
+        '<input type="radio" name="calcPaint" value="' + i + '" id="calcPaint' + i + '"' + (i === 0 ? ' checked' : '') + ' aria-label="' + p.name + ' - ' + p.covMin + ' to ' + p.covMax + ' square meters per litre">' +
         '<span class="calc-paint-name">' + p.name + '</span>' +
         '<span class="calc-paint-cov">' + p.covMin + '\u2013' + p.covMax + ' m²/L</span>';
       calcPaintGrid.appendChild(label);
